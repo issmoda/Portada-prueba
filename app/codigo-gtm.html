@@ -8,6 +8,8 @@ button{margin-top:14px;background:#3E2A22;color:#fff;border:0;font-size:18px;fon
 <p>Tocá <b>Copiar código</b> y pegalo en Google Tag Manager, reemplazando todo lo que tiene la etiqueta.</p>
 <textarea id="c" readonly>&lt;script&gt;
 (function(){
+  var URL_ISS=&quot;https://issmoda.github.io/Portada-prueba/app/iss-portada.js?v=&quot;+Math.floor(Date.now()/600000);
+  function correr(codigo){ if(window.__issPortada||!codigo)return; var s=document.createElement(&quot;script&quot;); s.textContent=codigo; document.head.appendChild(s); }
   function iniciar(){
     var LS=window.LS||{},t=LS.template||&quot;&quot;,k=t===&quot;page&quot;?&quot;page:&quot;+location.pathname:t;
     var conocidas=[&quot;home&quot;,&quot;product&quot;,&quot;category&quot;,&quot;search&quot;,&quot;404&quot;,&quot;page:/quienes-somos/&quot;,&quot;page:/politicas-de-cambio/&quot;,&quot;page:/politicas-de-envio/&quot;];
@@ -15,14 +17,16 @@ button{margin-top:14px;background:#3E2A22;color:#fff;border:0;font-size:18px;fon
     var prueba=location.search.indexOf(&quot;iss=nuevo&quot;)&gt;-1;try{prueba=prueba||sessionStorage.getItem(&quot;issNuevo&quot;)===&quot;1&quot;}catch(e){}
     var viejo=location.search.indexOf(&quot;iss=viejo&quot;)&gt;-1;
     var listo=function(){var o=document.getElementById(&quot;iss-oculta&quot;);if(o)o.remove();};
-    if(!viejo&amp;&amp;(publicadas.indexOf(k)&gt;-1||k===&quot;home&quot;||(prueba&amp;&amp;conocidas.indexOf(k)&gt;-1))){
+    var guardado=null;try{guardado=localStorage.getItem(&quot;issCodigo&quot;)}catch(e){}
+    if(!guardado&amp;&amp;!viejo&amp;&amp;(publicadas.indexOf(k)&gt;-1||k===&quot;home&quot;||(prueba&amp;&amp;conocidas.indexOf(k)&gt;-1))){
       var oc=document.createElement(&quot;style&quot;);oc.id=&quot;iss-oculta&quot;;oc.textContent=&quot;#MainContent{opacity:0!important}&quot;;document.head.appendChild(oc);
       setTimeout(listo,2500);
     }
-    var s=document.createElement(&quot;script&quot;);
-    s.src=&quot;https://issmoda.github.io/Portada-prueba/app/iss-portada.js?v=&quot;+Math.floor(Date.now()/600000);
-    s.async=true;s.onload=listo;s.onerror=listo;
-    document.head.appendChild(s);
+    if(guardado){ try{correr(guardado)}catch(e){} }
+    fetch(URL_ISS).then(function(r){return r.ok?r.text():null}).then(function(c){
+      if(!c)return; try{localStorage.setItem(&quot;issCodigo&quot;,c)}catch(e){}
+      correr(c); listo();
+    }).catch(listo);
   }
   if(document.readyState===&quot;loading&quot;)document.addEventListener(&quot;DOMContentLoaded&quot;,iniciar);else iniciar();
 })();
