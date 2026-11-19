@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ISS MODA · categoría (modelo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;600;700&family=Instrument+Serif:ital@0;1&family=Courier+Prime:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Shrikhand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilos.css">
+<style>
+.c-hero{position:relative;height:250px;overflow:hidden;background:var(--nude)}
+.c-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;animation:zoomIn 7s ease-out both}
+@keyframes zoomIn{from{transform:scale(1.15)}}
+.c-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(43,32,28,.65))}
+.c-hero .t{position:absolute;left:18px;right:18px;bottom:18px;z-index:2;color:#fff}
+.c-hero .corchete{animation:subeL .6s .1s both}
+.c-hero h1{font-family:var(--caps);font-weight:600;font-size:50px;text-transform:uppercase;line-height:.92;margin-top:8px;animation:subeL .7s .25s both}
+.c-hero h1 i{font-family:var(--serif);font-weight:400;text-transform:none}
+.c-hero p{font-size:13px;opacity:.9;margin-top:4px;animation:subeL .7s .4s both}
+@keyframes subeL{from{opacity:0;transform:translateY(24px)}}
+.c-hero.busq{height:auto;background:var(--rosa) var(--grano);padding:30px 18px 24px}
+.c-hero.busq:after{display:none}
+.c-hero.busq .t{position:static;color:var(--bordo)}
+.otras{display:flex;gap:8px;overflow-x:auto;padding:14px 18px 4px;scrollbar-width:none}
+.otras::-webkit-scrollbar{display:none}
+.otras a{flex:none;font-size:13px;padding:8px 13px;border:1.5px solid var(--beige2);border-radius:99px;background:#fff}
+.otras a.on{background:var(--bordo);border-color:var(--bordo);color:#fff}
+.barra-f{position:sticky;top:58px;z-index:30;background:rgba(255,253,250,.94);backdrop-filter:blur(12px);display:flex;gap:8px;padding:10px 18px;border-bottom:1px solid var(--beige2);margin-top:10px}
+.barra-f button{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:500;padding:9px 14px;border:1.5px solid var(--beige2);background:#fff;border-radius:99px}
+.barra-f button svg{width:15px;height:15px;stroke:var(--bordo);fill:none;stroke-width:2}
+.barra-f button em{font-style:normal;background:var(--chicle);color:#fff;font-size:10px;font-weight:700;border-radius:9px;min-width:17px;height:17px;display:grid;place-items:center;padding:0 4px}
+.barra-f .n{margin-left:auto;align-self:center;font-family:var(--mono);font-size:12px;color:var(--gris)}
+.activos{display:flex;gap:6px;flex-wrap:wrap;padding:10px 18px 0}
+.activos button{font-size:12px;background:var(--rosa2);color:var(--bordo);padding:5px 10px;border-radius:99px}
+.activos button:after{content:" ×";font-weight:700}
+.grilla-c{display:grid;grid-template-columns:1fr 1fr;gap:20px 12px;padding:18px 18px 0}
+.grilla-c .pr{width:auto;max-width:none;animation:baraja .55s cubic-bezier(.2,1.3,.4,1) both}
+.grilla-c .pr:nth-child(even){margin-top:24px}
+.grilla-c .pr .ft{transform:none!important}
+.vacio-c{text-align:center;padding:40px 20px}
+.vacio-c p{font-family:var(--serif);font-style:italic;font-size:34px;color:var(--bordo);line-height:1}
+.vacio-c small{display:block;color:var(--gris);margin:8px 0 18px}
+/* hoja de filtros */
+.hf-fondo{position:fixed;inset:0;background:rgba(43,32,28,.45);z-index:93;opacity:0;pointer-events:none;transition:.3s}
+.hf-fondo.ab{opacity:1;pointer-events:auto}
+.hf{position:fixed;left:0;right:0;bottom:0;z-index:94;background:var(--crema);border-radius:22px 22px 0 0;padding:10px 20px 20px;transform:translateY(105%);transition:transform .45s cubic-bezier(.2,1,.3,1);max-height:82vh;overflow:auto;max-width:560px;margin:0 auto}
+.hf.ab{transform:none}
+.hf:before{content:"";display:block;width:44px;height:4px;border-radius:2px;background:var(--beige2);margin:0 auto 12px}
+.hf h3{font-family:var(--caps);font-size:28px;text-transform:uppercase;color:var(--bordo)}
+.hf h4{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gris);margin:18px 0 9px}
+.hf .ops{display:flex;gap:8px;flex-wrap:wrap}
+.hf .ops button{font-size:13.5px;padding:9px 14px;border:1.5px solid var(--beige2);background:#fff;border-radius:99px}
+.hf .ops button.on{background:var(--bordo);border-color:var(--bordo);color:#fff}
+.hf .ops .sw{width:34px;height:34px;padding:0;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.hf .ops .sw.on{box-shadow:0 0 0 2px var(--crema),0 0 0 4px var(--bordo)}
+.hf-pie{display:flex;gap:10px;margin-top:22px;position:sticky;bottom:0;background:var(--crema);padding-top:10px}
+.hf-pie .limpiar{font-size:13px;text-decoration:underline;color:var(--bordo);padding:0 6px}
+.hf-pie .cta{flex:1}
+</style>
+</head>
+<body>
+<div id="cabecera"></div>
+<section class="c-hero" id="hero"><img id="heroImg" alt=""><div class="t"><span class="corchete" id="heroTag"></span><h1 id="heroT"></h1><p id="heroP"></p></div></section>
+<nav class="otras" id="otras"></nav>
+<div class="barra-f">
+  <button id="abrirF"><svg viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filtrar <em id="nF" style="display:none">0</em></button>
+  <button id="abrirO"><svg viewBox="0 0 24 24"><path d="M7 4v16M3 16l4 4 4-4M17 20V4M13 8l4-4 4 4"/></svg><span id="ordenT">Lo nuevo</span></button>
+  <span class="n" id="nRes"></span>
+</div>
+<div class="activos" id="activos"></div>
+<div class="grilla-c" id="grilla"></div>
+<div id="pie"></div>
+
+<div class="hf-fondo" id="hfF"></div>
+<div class="hf" id="hf">
+  <h3 id="hfT">Filtrar</h3>
+  <div id="hfCuerpo"></div>
+  <div class="hf-pie"><button class="limpiar" id="limpiar">Limpiar</button><button class="cta" id="aplicar">Ver resultados</button></div>
+</div>
+
+<script src="comun.js"></script>
+<script>
+issCabecera("Modelo de prueba · categoría y búsqueda con productos reales");
+var $=function(id){return document.getElementById(id)},fmt=issFmt,num=issNum,nombre=issNombre,P=[],F={talle:[],color:[],precio:null,stock:false},orden="nuevo",modo="f";
+var prm=new URLSearchParams(location.search),CAT=prm.get("c"),Q=prm.get("q");
+var HEX={chocolate:"#5A3A2A",negro:"#141210",blanco:"#FFFFFF",verde:"#6B8F5E",beige:"#E3D3BE",crema:"#F1E7D6",gris:"#9C9A97",rosa:"#E8A7B8",celeste:"#9CC9E3",lila:"#C8A2E0",marron:"#6B4A35",camel:"#B58252",amarillo:"#F1D36B",rojo:"#B3262E",azul:"#2B3F6B",nude:"#E4C9B4"};
+var hex=function(c){var k=String(c).toLowerCase();return HEX[k]||HEX[k.split(" ")[0]]||"#D9CFC6"};
+var sinT=function(s){return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")};
+var PREC=[["Hasta $30.000",0,30000],["$30.000 a $45.000",30000,45000],["Más de $45.000",45000,1e9]];
+issDatos().then(function(d){P=d;armar()});
+function base(){
+  if(Q)return P.filter(function(p){return sinT(p.n+" "+p.cat).indexOf(sinT(Q))>-1});
+  if(CAT)return P.filter(function(p){return p.cat===CAT});
+  return P.slice();
+}
+function armar(){
+  var B=base(),C=ISS_CATS.find(function(c){return c[1]===CAT});
+  if(Q){$("hero").classList.add("busq");$("heroImg").remove();$("heroTag").textContent="[ búsqueda ]";$("heroT").innerHTML='Resultados para <i>“'+Q+'”</i>';$("heroP").textContent=B.length?"":"";}
+  else{var foto=(B.find(function(p){return p.imgs&&p.imgs.length>1})||B[0]||P[0]);$("heroImg").src=(foto.imgs&&foto.imgs[1])||foto.img;
+    var t=C?C[0]:"Toda la tienda",w=t.split(" ");$("heroTag").textContent=C?"[ categoría ]":"[ primavera · verano 26 ]";$("heroT").innerHTML=w[0]+(w.length>1?' <i>'+w.slice(1).join(" ")+'</i>':'');$("heroP").textContent="Precios en efectivo con 20% off ya aplicado";}
+  document.title=(Q?"Búsqueda: "+Q:(C?C[0]:"Toda la tienda"))+" · ISS MODA (modelo)";
+  $("otras").innerHTML='<a href="categoria.html"'+(!CAT&&!Q?' class="on"':'')+'>Todo</a>'+ISS_CATS.map(function(c){return '<a href="categoria.html?c='+encodeURIComponent(c[1])+'"'+(c[1]===CAT?' class="on"':'')+'>'+c[0]+'</a>'}).join("");
+  var on=$("otras").querySelector(".on");if(on)$("otras").scrollLeft=on.offsetLeft-18;
+  pintar();
+}
+function lista(){
+  var R=base().filter(function(p){var V=p.vars||[];
+    if(F.talle.length&&!V.some(function(v){return v.ok&&v.stock>0&&F.talle.indexOf(v.o[0])>-1}))return false;
+    if(F.color.length&&!V.some(function(v){return v.ok&&v.stock>0&&F.color.indexOf(v.o[1])>-1}))return false;
+    if(F.precio!=null){var x=num(p.p),r=PREC[F.precio];if(x<r[1]||x>=r[2])return false;}
+    if(F.stock&&!V.some(function(v){return v.ok&&v.stock>0}))return false;return true;});
+  if(orden==="menor")R.sort(function(a,b){return num(a.p)-num(b.p)});
+  if(orden==="mayor")R.sort(function(a,b){return num(b.p)-num(a.p)});
+  return R;
+}
+function pintar(){
+  var R=lista();$("nRes").textContent=R.length+(R.length===1?" prenda":" prendas");
+  $("grilla").innerHTML=R.length?R.map(function(p,i){return issTarjeta(p).replace('class="pr"','class="pr" style="animation-delay:'+Math.min(i,8)*.05+'s"')}).join(""):
+    '<div class="vacio-c" style="grid-column:1/-1"><p>No hay prendas<br>con esos filtros</p><small>Probá sacando alguno, o escribinos y te ayudamos a encontrar lo que buscás.</small><button class="cta" onclick="F={talle:[],color:[],precio:null,stock:false};pintar()">Ver todo</button></div>';
+  var n=F.talle.length+F.color.length+(F.precio!=null?1:0)+(F.stock?1:0);$("nF").textContent=n;$("nF").style.display=n?"grid":"none";
+  $("activos").innerHTML=F.talle.map(function(t){return '<button data-k="talle" data-v="'+t+'">Talle '+t+'</button>'}).concat(F.color.map(function(c){return '<button data-k="color" data-v="'+c+'">'+c+'</button>'})).concat(F.precio!=null?['<button data-k="precio">'+PREC[F.precio][0]+'</button>']:[]).concat(F.stock?['<button data-k="stock">Con stock</button>']:[]).join("");
+  $("ordenT").textContent={nuevo:"Lo nuevo",menor:"Menor precio",mayor:"Mayor precio"}[orden];
+}
+$("activos").onclick=function(e){var b=e.target.closest("button");if(!b)return;var k=b.dataset.k;if(k==="talle"||k==="color")F[k]=F[k].filter(function(x){return x!==b.dataset.v});else if(k==="precio")F.precio=null;else F.stock=false;pintar();};
+function hoja(a){$("hf").classList.toggle("ab",a);$("hfF").classList.toggle("ab",a);document.body.style.overflow=a?"hidden":"";}
+$("hfF").onclick=function(){hoja(false)};
+function cuerpoF(){
+  var B=base(),T=[],Co=[];B.forEach(function(p){(p.vars||[]).forEach(function(v){if(!(v.ok&&v.stock>0))return;if(v.o[0]&&T.indexOf(v.o[0])<0)T.push(v.o[0]);if(v.o[1]&&Co.indexOf(v.o[1])<0)Co.push(v.o[1]);});});
+  var ordT=["XS","S","M","L","XL","XXL","Único"];T.sort(function(a,b){return (ordT.indexOf(a)+99)%99-(ordT.indexOf(b)+99)%99});
+  $("hfCuerpo").innerHTML='<h4>Talle</h4><div class="ops">'+T.map(function(t){return '<button data-k="talle" data-v="'+t+'"'+(F.talle.indexOf(t)>-1?' class="on"':'')+'>'+t+'</button>'}).join("")+'</div>'+
+    '<h4>Color</h4><div class="ops">'+Co.map(function(c){return '<button class="sw'+(F.color.indexOf(c)>-1?' on':'')+'" data-k="color" data-v="'+c+'" title="'+c+'" style="background:'+hex(c)+'"></button>'}).join("")+'</div>'+
+    '<h4>Precio</h4><div class="ops">'+PREC.map(function(r,i){return '<button data-k="precio" data-v="'+i+'"'+(F.precio===i?' class="on"':'')+'>'+r[0]+'</button>'}).join("")+'</div>'+
+    '<h4>Disponibilidad</h4><div class="ops"><button data-k="stock"'+(F.stock?' class="on"':'')+'>Solo con stock</button></div>';
+  var n=lista().length;$("aplicar").textContent="Ver "+n+(n===1?" prenda":" prendas");
+}
+$("hfCuerpo").onclick=function(e){var b=e.target.closest("button");if(!b)return;var k=b.dataset.k,v=b.dataset.v;
+  if(modo==="o"){orden=v;pintar();hoja(false);return;}
+  if(k==="talle"||k==="color"){var i=F[k].indexOf(v);if(i>-1)F[k].splice(i,1);else F[k].push(v);}else if(k==="precio")F.precio=F.precio===+v?null:+v;else F.stock=!F.stock;cuerpoF();};
+$("abrirF").onclick=function(){modo="f";$("hfT").textContent="Filtrar";document.querySelector(".hf-pie").style.display="flex";cuerpoF();hoja(true);};
+$("abrirO").onclick=function(){modo="o";$("hfT").textContent="Ordenar";document.querySelector(".hf-pie").style.display="none";
+  $("hfCuerpo").innerHTML='<div class="ops" style="flex-direction:column;align-items:flex-start;margin-top:12px">'+[["nuevo","Lo nuevo"],["menor","Menor precio"],["mayor","Mayor precio"]].map(function(o){return '<button data-v="'+o[0]+'"'+(orden===o[0]?' class="on"':'')+'>'+o[1]+'</button>'}).join("")+'</div>';hoja(true);};
+$("aplicar").onclick=function(){pintar();hoja(false);window.scrollTo({top:$("grilla").offsetTop-130,behavior:"smooth"});};
+$("limpiar").onclick=function(){F={talle:[],color:[],precio:null,stock:false};cuerpoF();};
+</script>
+</body>
+</html>
