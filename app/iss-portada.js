@@ -6,7 +6,7 @@
 (function () {
   "use strict";
   var MODO = "prueba";
-  var VERSION = "20261119-1627";
+  var VERSION = "20261119-1642";
   if (window.__issPortada) return;
   window.__issPortada = VERSION;
   var LS = window.LS || {};
@@ -21,7 +21,7 @@
 
   /* ---------- configuración (se puede cambiar sin tocar el resto) ---------- */
   var CONF = {
-    portada: "/portada/",                                  // categoría oculta con las fotos grandes (si no existe, usa las más vendidas)
+    portada: "/portada-po2wh/",                                  // categoría oculta con las fotos grandes (si no existe, usa las más vendidas)
     looks: [                                               // categorías ocultas de looks (si no existen, el ticket muestra las más vendidas)
       { b: "Look 1", url: "/look-1/" }, { b: "Look 2", url: "/look-2/" }, { b: "Look 3", url: "/look-3/" }
     ],
