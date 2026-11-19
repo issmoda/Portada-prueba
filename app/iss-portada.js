@@ -4,7 +4,7 @@
  * Lee productos, precios y stock en vivo. Si algo falla, queda la página de siempre del tema. */
 (function () {
   "use strict";
-  var VERSION = "20261119-1752";
+  var VERSION = "20261119-1832";
   var MODOS = {"home": "todos", "producto": "prueba", "listado": "prueba", "paginas": "prueba", "e404": "prueba", "cuenta": "prueba", "carrito": "prueba", "menu": "prueba"};
   if (window.__issPortada) return;
   window.__issPortada = VERSION;
@@ -380,6 +380,33 @@
     });
   }
 
+  /* ---------- parte de arriba: franja de beneficios y menú con el estilo nuevo ---------- */
+  var CABECERA_CSS = [
+    "body.iss-cab .adbar{background:#3E2A22!important;padding:0!important;overflow:hidden}",
+    "body.iss-cab .adbar>.container>*:not(.iss-aviso){display:none!important}",
+    ".iss-aviso{white-space:nowrap;overflow:hidden;padding:9px 0;color:#F3ECE4;font-family:Antonio,Impact,sans-serif;font-size:13px;letter-spacing:.12em;text-transform:uppercase}",
+    ".iss-aviso>div{display:inline-block;animation:iss-cab-corre 32s linear infinite}",
+    ".iss-aviso span{margin:0 16px}.iss-aviso i{font-style:normal;color:#E39AB0}",
+    "@keyframes iss-cab-corre{to{transform:translateX(-50%)}}",
+    "body.iss-cab .js-head-main{background:#FFFDFA!important;border-bottom:1px solid #E6D9CB}",
+    "body.iss-cab .nav-desktop-container .nav-list-link,body.iss-cab .main-categories-container a{font-family:Antonio,Impact,sans-serif!important;font-size:15px!important;letter-spacing:.08em!important;text-transform:uppercase!important;color:#3E2A22!important;font-weight:600!important}",
+    "body.iss-cab .nav-desktop-container .nav-list-link:hover{color:#B5536E!important}",
+    "body.iss-cab #nav-hamburger .nav-list-link{font-family:Antonio,Impact,sans-serif!important;font-size:19px!important;letter-spacing:.04em;text-transform:uppercase;color:#3E2A22!important}",
+    "body.iss-cab #nav-hamburger,body.iss-cab #nav-hamburger .modal-body,body.iss-cab #nav-hamburger .modal-header,body.iss-cab #nav-hamburger .modal-footer{background:#FFFDFA!important}",
+    "@media (prefers-reduced-motion:reduce){.iss-aviso>div{animation:none}}"
+  ].join("\n");
+  function cabeceraNueva() {
+    var ad = document.querySelector("header .adbar .container") || document.querySelector(".adbar .container");
+    ponerCss();
+    var s = document.createElement("style"); s.id = "iss-cab-css"; s.textContent = CABECERA_CSS; document.head.appendChild(s);
+    document.body.classList.add("iss-cab");
+    if (ad && !ad.querySelector(".iss-aviso")) {
+      var items = '<span>Envío en moto en 48 h · CABA y AMBA desde $4.500</span><i>★</i><span>20% off en efectivo o transferencia</span><i>★</i><span>2 y 3 cuotas sin interés</span><i>★</i><span>Cambios en 15 días</span><i>★</i><span>+30 años vistiéndote</span><i>★</i>';
+      var d = document.createElement("div"); d.className = "iss-aviso"; d.innerHTML = "<div>" + items + items + "</div>";
+      ad.appendChild(d);
+    }
+  }
+
   /* ---------- montar una página nueva ---------- */
   var cssPuesto = false;
   function ponerCss() {
@@ -689,7 +716,7 @@
   try {
     if (LS.template === "home" && activa("home")) paginaHome();
     if (activa("carrito")) barraCarrito();
-    if (activa("menu")) menuConFotos();
+    if (activa("menu")) { menuConFotos(); cabeceraNueva(); }
     if (T === "product" && activa("producto")) paginaProducto();
     else if ((T === "category" || T === "search") && activa("listado")) paginaListado();
     else if (T === "page" && activa("paginas")) {
