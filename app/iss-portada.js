@@ -6,7 +6,7 @@
 (function () {
   "use strict";
   var MODO = "prueba";
-  var VERSION = "20261119-0406";
+  var VERSION = "20261119-1626";
   if (window.__issPortada) return;
   window.__issPortada = VERSION;
   var LS = window.LS || {};
@@ -155,7 +155,7 @@
   Promise.all([nuevos, vendidos, leer(CONF.portada)]).then(function (r) {
     var N = disponibles(r[0]), V = disponibles(r[1]), PO = disponibles(r[2]);
     if (!N.length && !V.length) return deshacer("no se pudieron leer los productos");
-    armarPortada(PO.length ? PO.slice(0, 4) : V.slice(0, 3));
+    armarPortada(PO.length ? PO.slice(0, 6) : V.slice(0, 3));
     $("carril").innerHTML = N.slice(0, 8).map(tarjeta).join("");
     armarTicket(V);
     armarOcasion();
