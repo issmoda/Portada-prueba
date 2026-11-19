@@ -42,7 +42,21 @@
 .puntos-c .ben{margin-top:14px;border-top:1px dashed rgba(255,255,255,.3);padding-top:12px;font-family:var(--mono);font-size:12.5px}
 .puntos-c .cta{margin-top:14px;width:100%;background:var(--crema);color:var(--bordo);box-shadow:4px 4px 0 var(--chicle)}
 .puntos-c .estrella{fill:var(--chicle)}
+.ver-pts{margin-top:26px;border:1.5px dashed var(--chicle);background:#fff;padding:20px 18px}
+.ver-pts h3{font-family:var(--caps);font-size:26px;text-transform:uppercase;color:var(--bordo);line-height:1}
+.ver-pts h3 i{font-family:var(--serif);font-weight:400;text-transform:none}
+.ver-pts>p{font-size:13.5px;color:var(--gris);margin-top:6px}
+.via{display:flex;gap:8px;margin-top:14px}
+.via button{flex:1;padding:10px;border:1.5px solid var(--beige2);font-size:14px;font-weight:500;display:flex;align-items:center;justify-content:center;gap:6px;transition:.2s}
+.via button.on{background:var(--bordo);border-color:var(--bordo);color:#fff}
+.via svg{width:17px;height:17px}
+.codigo{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.codigo input{width:42px;height:52px;text-align:center;font-family:var(--caps);font-size:24px!important;border:1.5px solid var(--beige2);background:#fff;outline:none}
+.codigo input:focus{border-color:var(--chicle)}
+.paso-pts{display:none}.paso-pts.on{display:block;animation:msj .4s cubic-bezier(.2,1.3,.4,1)}
+.aviso-cod{font-size:13px;color:var(--tinta);margin-top:12px;text-align:center}
 </style>
+<link rel="stylesheet" href="pc.css">
 </head>
 <body>
 <div id="cabecera"></div>
@@ -63,9 +77,23 @@
     <svg class="estrella" style="top:16px;right:20px" viewBox="0 0 24 24"><path d="M12 1l3.2 7 7.6.8-5.7 5.1 1.6 7.6L12 17.6 5.3 21.5l1.6-7.6L1.2 8.8 8.8 8z"/></svg>
     <span class="corchete">[ tus puntos ISS ]</span>
     <div class="n"><span id="nPts">0</span><small>puntos</small></div>
-    <p>Son los mismos del local: sumás comprando en San Fernando y en la web, con este mismo mail.</p>
+    <p>Son los mismos del local: sumás comprando en San Fernando y en la web, con tu mismo mail o WhatsApp.</p>
     <div class="ben">[ ejemplo · los beneficios salen de Stila → Marketing → Puntos ]</div>
     <a class="cta" href="#">Canjear por un cupón</a>
+  </div>
+  <div class="ver-pts" id="verPts">
+    <h3>¿Comprás en el local? <i>Mirá tus puntos</i></h3>
+    <p>Son los mismos puntos del local. Te mandamos un código para entrar, sin contraseña.</p>
+    <div class="paso-pts on" id="pp1">
+      <div class="via" id="via"><button class="on" data-v="mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Mail</button><button data-v="wa"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2z"/></svg>WhatsApp</button></div>
+      <div class="campo"><input id="dato" type="email" placeholder=" "><label id="datoL">Tu mail</label></div>
+      <button class="cta" id="mandar" style="width:100%;margin-top:14px">Mandame el código</button>
+    </div>
+    <div class="paso-pts" id="pp2">
+      <p class="aviso-cod" id="avisoCod"></p>
+      <div class="codigo" id="codigo"><input inputmode="numeric" maxlength="1"><input inputmode="numeric" maxlength="1"><input inputmode="numeric" maxlength="1"><input inputmode="numeric" maxlength="1"><input inputmode="numeric" maxlength="1"><input inputmode="numeric" maxlength="1"></div>
+      <p class="aviso-cod" style="color:var(--gris);font-size:12px">(modelo: poné cualquier número)</p>
+    </div>
   </div>
   <div class="ventajas"><b>Con tu cuenta</b><ul><li>Seguís tus pedidos</li><li>Comprás más rápido: tus datos quedan guardados</li><li>Ves todas tus compras anteriores</li><li><b>Ves tus puntos ISS</b>: los mismos del local</li></ul></div>
 </section>
@@ -81,6 +109,19 @@ function enviar(){document.getElementById("form").style.display="none";document.
   var pc=document.getElementById("puntos");pc.style.display="block";var el=document.getElementById("nPts"),to=reg?0:1250,t0=null;
   if(to)requestAnimationFrame(function f(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/1400);el.textContent=Math.round(to*(1-Math.pow(1-k,3))).toLocaleString("es-AR");if(k<1)requestAnimationFrame(f)});
   return false;}
+var via="mail";
+document.getElementById("via").onclick=function(e){var b=e.target.closest("button");if(!b)return;via=b.dataset.v;[].forEach.call(this.children,function(x){x.classList.toggle("on",x===b)});
+  var d=document.getElementById("dato");d.value="";d.type=via==="mail"?"email":"tel";d.inputMode=via==="mail"?"email":"tel";document.getElementById("datoL").textContent=via==="mail"?"Tu mail":"Tu WhatsApp (ej.: 11 2345-6789)";};
+document.getElementById("mandar").onclick=function(){var d=document.getElementById("dato").value.trim();if(!d){document.getElementById("dato").focus();return;}
+  document.getElementById("pp1").classList.remove("on");document.getElementById("pp2").classList.add("on");
+  document.getElementById("avisoCod").textContent="Te mandamos un código de 6 números por "+(via==="mail"?"mail a "+d:"WhatsApp al "+d)+".";
+  document.querySelector("#codigo input").focus();};
+var cajas=[].slice.call(document.querySelectorAll("#codigo input"));
+cajas.forEach(function(c,i){c.oninput=function(){c.value=c.value.replace(/\D/g,"").slice(0,1);if(c.value&&cajas[i+1])cajas[i+1].focus();
+  if(cajas.every(function(x){return x.value})){document.getElementById("verPts").style.display="none";var pc=document.getElementById("puntos");pc.style.display="block";
+    var el=document.getElementById("nPts"),to=1250,t0=null;requestAnimationFrame(function f(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/1400);el.textContent=Math.round(to*(1-Math.pow(1-k,3))).toLocaleString("es-AR");if(k<1)requestAnimationFrame(f)});
+    pc.scrollIntoView({behavior:"smooth",block:"center"});}};
+  c.onkeydown=function(e){if(e.key==="Backspace"&&!c.value&&cajas[i-1])cajas[i-1].focus();};});
 </script>
 </body>
 </html>

@@ -1,0 +1,87 @@
+/* ISS MODA · modelo · ajustes comunes de celular + versión computadora */
+
+/* ---------- celular: que nada se corra ni haga zoom ---------- */
+html,body{overflow-x:hidden;overflow-x:clip;max-width:100%}
+input,select,textarea{font-size:16px!important}          /* iPhone hace zoom si la letra del campo es menor a 16 */
+.hoja,.hf{visibility:hidden}.hoja.ab,.hf.ab{visibility:visible}
+.cr:not(.ab),.mn:not(.ab){visibility:hidden;transition:transform .5s cubic-bezier(.2,1,.3,1),visibility 0s .5s}
+.cr.ab,.mn.ab{visibility:visible;transition:transform .5s cubic-bezier(.2,1,.3,1)}
+img{-webkit-user-drag:none}
+
+/* ---------- computadora ---------- */
+@media (min-width:900px){
+  .cab{max-width:1320px;margin:0 auto;padding:0 32px;height:70px}
+  .cab .logo{height:56px}
+  .buscador{max-width:560px;margin:10px auto 0}
+  .tit{max-width:1320px;margin-left:auto;margin-right:auto;padding:0 32px}
+  .tit .caps{font-size:64px}.tit .it{font-size:78px}
+  .carril{max-width:1320px;margin:0 auto;padding:6px 32px 24px;scroll-padding:0 32px}
+  .carril .pr,.fila .pr{width:calc(25% - 11px);max-width:none}
+  .chips{max-width:1320px;margin:0 auto;padding-left:32px;padding-right:32px}
+  footer{padding-bottom:50px}
+
+  /* portada: texto a la izquierda, fotos a la derecha */
+  .hero2{height:min(86vh,760px);background:var(--rosa) var(--grano)}
+  .hero2 #slides{left:46%;right:0;inset-block:0}
+  .hero2 .velo{left:46%;background:linear-gradient(90deg,rgba(43,32,28,.12),transparent 30%)}
+  .hero2 .tz{left:46%!important;width:27%}.hero2 .tzd{left:73%!important}
+  .barras-h{left:calc(46% + 20px);right:20px}
+  .hero2-tit{left:5vw;right:56%;top:90px}
+  .hero2-tit .caps{color:var(--bordo);font-size:72px;text-shadow:none}
+  .hero2-tit .it{color:var(--bordo);font-size:104px;margin-top:74px}
+  .hero2-tit .sel i,.hero2-tit .sel i:after{background:var(--bordo)}
+  .etqP{left:calc(46% + 24px);bottom:28px;min-width:240px;max-width:320px}
+  .giro{right:28px;bottom:28px;width:124px;height:124px}
+  .hero-pie{position:relative;z-index:4;width:44%;margin:calc(-1 * min(86vh,760px) + 430px) 0 0 5vw;background:none;border:0;text-align:left;padding:0 0 60px}
+  .hero-pie .hero-sub{margin:0 0 20px;max-width:440px;font-size:17px}
+  .hero-pie .cta{margin:0;max-width:360px}
+  .benef{margin:22px 0 0;max-width:460px}
+  .hist{justify-content:center}.historias .top{justify-content:center}
+  .nuevo,.ocasion,.envio,.locales,.chat-sec{max-width:1320px;margin-left:auto;margin-right:auto}
+  .ruta,.resp{max-width:760px;margin-left:32px}
+  .grilla{grid-template-columns:repeat(4,1fr);gap:30px 20px;padding:0 32px}
+  .look-grid{grid-template-columns:1.1fr 1fr;align-items:center;gap:48px}
+  .luana{display:grid;grid-template-columns:1fr 1.2fr;align-items:center;padding:70px 6vw}
+  .luana .txt{text-align:left;padding:0}.luana p{margin-left:0}
+  .luana .sellos{grid-column:1/-1}
+  .etiquetas{grid-template-columns:1fr 1fr;padding:22px 32px 0;max-width:1100px}
+  .chat-sec{max-width:640px}
+  .club .corazon{transform:scale(1.15)}
+
+  /* producto: fotos a la izquierda, datos a la derecha */
+  .prod-top{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:56px;max-width:1320px;margin:0 auto;padding:0 32px;align-items:start}
+  .col-izq{position:sticky;top:84px}
+  .col-izq .gal-pista figure{aspect-ratio:4/5}
+  .migas{max-width:1320px;margin:0 auto;padding:16px 32px}
+  .miniaturas{padding:12px 0 0}.miniaturas img{width:68px;height:86px}
+  .info{padding:10px 0 0}.info h1{font-size:58px}.info h1 em{font-size:60px}
+  .envio-p{margin:26px 0 0}
+  .look-p{padding:56px max(32px,calc((100vw - 1256px)/2))}
+  .combo{max-width:900px;gap:16px}.combo-total{max-width:900px}
+  .det{max-width:900px;margin:0 auto;padding:50px 32px 0}
+  .relacionados .carril{padding-top:6px}
+  .fija{max-width:640px;left:auto;right:24px;bottom:20px;border:1px solid var(--beige2);box-shadow:0 12px 30px rgba(0,0,0,.12)}
+  .zoom img{width:100%}
+  .hoja,.hf{left:50%;right:auto;width:520px;transform:translate(-50%,105%)}
+  .hoja.ab,.hf.ab{transform:translate(-50%,0)}
+
+  /* categoría */
+  .c-hero{height:360px}.c-hero .t{left:32px;bottom:34px;max-width:1320px}.c-hero h1{font-size:76px}
+  .c-hero.busq{padding:50px 32px 36px}
+  .otras,.activos{max-width:1320px;margin:0 auto;padding-left:32px;padding-right:32px}
+  .barra-f{padding:12px max(32px,calc((100vw - 1256px)/2));top:70px}
+  .grilla-c{grid-template-columns:repeat(4,1fr);gap:34px 20px;max-width:1320px;margin:0 auto;padding:26px 32px 0}
+
+  /* páginas de texto: columna central */
+  .q-hero,.datos-q,.capitulos,.nosotras,.firma-q,.visitanos{max-width:980px;margin-left:auto;margin-right:auto}
+  .capitulos{grid-template-columns:repeat(3,1fr);gap:34px}
+  .a-hero,.panel,.ayuda-wa{max-width:820px;margin-left:auto;margin-right:auto}
+  .pest{justify-content:center}
+  .g-hero{padding:70px 18px 50px}
+  .pasos,.res,.acc{max-width:640px;margin-left:auto;margin-right:auto}
+  .e,.sug{max-width:1100px;margin-left:auto;margin-right:auto}
+  .sug .grilla-e{grid-template-columns:repeat(4,1fr)}
+}
+@media (min-width:1500px){
+  .hero2-tit .caps{font-size:84px}.hero2-tit .it{font-size:120px}
+}
