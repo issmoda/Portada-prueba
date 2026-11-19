@@ -34,6 +34,14 @@
 .modo-reg .login-only{display:none}
 .ok-msg{display:none;text-align:center;padding:30px 0}
 .ok-msg p{font-family:var(--serif);font-style:italic;font-size:34px;color:var(--bordo)}
+.puntos-c{display:none;margin-top:18px;background:var(--bordo) var(--grano);color:var(--crema);padding:22px 20px;position:relative;overflow:hidden;animation:pop .6s cubic-bezier(.2,1.4,.45,1) both}
+.puntos-c .corchete{background:var(--chicle);color:#fff}
+.puntos-c .n{font-family:var(--caps);font-weight:700;font-size:64px;line-height:.9;margin-top:10px}
+.puntos-c .n small{font-family:var(--serif);font-style:italic;font-weight:400;font-size:28px;margin-left:6px}
+.puntos-c p{font-size:13.5px;opacity:.85;margin-top:6px;line-height:1.45}
+.puntos-c .ben{margin-top:14px;border-top:1px dashed rgba(255,255,255,.3);padding-top:12px;font-family:var(--mono);font-size:12.5px}
+.puntos-c .cta{margin-top:14px;width:100%;background:var(--crema);color:var(--bordo);box-shadow:4px 4px 0 var(--chicle)}
+.puntos-c .estrella{fill:var(--chicle)}
 </style>
 </head>
 <body>
@@ -51,7 +59,15 @@
     <button class="cta" id="fBtn">Ingresar</button>
   </form>
   <div class="ok-msg" id="ok"><p id="okT"></p><small style="color:var(--gris)">(modelo: en la tienda real esto lo maneja Tiendanube)</small></div>
-  <div class="ventajas"><b>Con tu cuenta</b><ul><li>Seguís tus pedidos</li><li>Comprás más rápido: tus datos quedan guardados</li><li>Ves todas tus compras anteriores</li></ul></div>
+  <div class="puntos-c" id="puntos">
+    <svg class="estrella" style="top:16px;right:20px" viewBox="0 0 24 24"><path d="M12 1l3.2 7 7.6.8-5.7 5.1 1.6 7.6L12 17.6 5.3 21.5l1.6-7.6L1.2 8.8 8.8 8z"/></svg>
+    <span class="corchete">[ tus puntos ISS ]</span>
+    <div class="n"><span id="nPts">0</span><small>puntos</small></div>
+    <p>Son los mismos del local: sumás comprando en San Fernando y en la web, con este mismo mail.</p>
+    <div class="ben">[ ejemplo · los beneficios salen de Stila → Marketing → Puntos ]</div>
+    <a class="cta" href="#">Canjear por un cupón</a>
+  </div>
+  <div class="ventajas"><b>Con tu cuenta</b><ul><li>Seguís tus pedidos</li><li>Comprás más rápido: tus datos quedan guardados</li><li>Ves todas tus compras anteriores</li><li><b>Ves tus puntos ISS</b>: los mismos del local</li></ul></div>
 </section>
 <div id="pie"></div>
 <script src="comun.js"></script>
@@ -61,7 +77,10 @@ var reg=false;
 document.getElementById("sw").onclick=function(e){var b=e.target.closest("button");if(!b)return;reg=b.dataset.m==="reg";this.classList.toggle("reg",reg);
   [].forEach.call(this.querySelectorAll("button"),function(x){x.classList.toggle("on",x===b)});document.getElementById("cu").classList.toggle("modo-reg",reg);document.getElementById("fBtn").textContent=reg?"Crear mi cuenta":"Ingresar";};
 function enviar(){document.getElementById("form").style.display="none";document.getElementById("ok").style.display="block";
-  var n=document.getElementById("fNom").value.trim();document.getElementById("okT").textContent=reg?("¡Bienvenida"+(n?", "+n:"")+"! 💌"):"¡Qué bueno verte!";return false;}
+  var n=document.getElementById("fNom").value.trim();document.getElementById("okT").textContent=reg?("¡Bienvenida"+(n?", "+n:"")+"! 💌"):"¡Qué bueno verte!";
+  var pc=document.getElementById("puntos");pc.style.display="block";var el=document.getElementById("nPts"),to=reg?0:1250,t0=null;
+  if(to)requestAnimationFrame(function f(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/1400);el.textContent=Math.round(to*(1-Math.pow(1-k,3))).toLocaleString("es-AR");if(k<1)requestAnimationFrame(f)});
+  return false;}
 </script>
 </body>
 </html>
