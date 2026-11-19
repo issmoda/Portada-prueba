@@ -1,0 +1,31 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Código para Google Tag Manager</title>
+<style>body{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;background:#F3ECE4;color:#3E2A22;margin:0;padding:30px 20px}
+h1{font-size:22px;margin:0 0 8px}p{margin:0 0 16px;line-height:1.5}
+textarea{width:100%;height:340px;font-family:Consolas,monospace;font-size:12px;border:1.5px solid #E6D9CB;padding:12px;box-sizing:border-box;background:#fff}
+button{margin-top:14px;background:#3E2A22;color:#fff;border:0;font-size:18px;font-weight:600;padding:14px 26px;border-radius:6px;cursor:pointer;box-shadow:4px 4px 0 #E39AB0}
+#ok{margin-left:12px;font-weight:600;color:#2E7D52}</style></head><body>
+<h1>Código para la etiqueta "iss portada"</h1>
+<p>Tocá <b>Copiar código</b> y pegalo en Google Tag Manager, reemplazando todo lo que tiene la etiqueta.</p>
+<textarea id="c" readonly>&lt;script&gt;
+(function(){
+  function iniciar(){
+    var LS=window.LS||{},t=LS.template||&quot;&quot;,k=t===&quot;page&quot;?&quot;page:&quot;+location.pathname:t;
+    var conocidas=[&quot;home&quot;,&quot;product&quot;,&quot;category&quot;,&quot;search&quot;,&quot;404&quot;,&quot;page:/quienes-somos/&quot;,&quot;page:/politicas-de-cambio/&quot;,&quot;page:/politicas-de-envio/&quot;];
+    var publicadas=[&quot;home&quot;];try{publicadas=JSON.parse(localStorage.getItem(&quot;issPlantillas&quot;)||&#x27;[&quot;home&quot;]&#x27;)}catch(e){}
+    var prueba=location.search.indexOf(&quot;iss=nuevo&quot;)&gt;-1;try{prueba=prueba||sessionStorage.getItem(&quot;issNuevo&quot;)===&quot;1&quot;}catch(e){}
+    var viejo=location.search.indexOf(&quot;iss=viejo&quot;)&gt;-1;
+    var listo=function(){var o=document.getElementById(&quot;iss-oculta&quot;);if(o)o.remove();};
+    if(!viejo&amp;&amp;(publicadas.indexOf(k)&gt;-1||k===&quot;home&quot;||(prueba&amp;&amp;conocidas.indexOf(k)&gt;-1))){
+      var oc=document.createElement(&quot;style&quot;);oc.id=&quot;iss-oculta&quot;;oc.textContent=&quot;#MainContent{opacity:0!important}&quot;;document.head.appendChild(oc);
+      setTimeout(listo,2500);
+    }
+    var s=document.createElement(&quot;script&quot;);
+    s.src=&quot;https://issmoda.github.io/Portada-prueba/app/iss-portada.js?v=&quot;+Math.floor(Date.now()/600000);
+    s.async=true;s.onload=listo;s.onerror=listo;
+    document.head.appendChild(s);
+  }
+  if(document.readyState===&quot;loading&quot;)document.addEventListener(&quot;DOMContentLoaded&quot;,iniciar);else iniciar();
+})();
+&lt;/script&gt;</textarea><br>
+<button onclick="var t=document.getElementById('c');t.select();t.setSelectionRange(0,99999);(navigator.clipboard?navigator.clipboard.writeText(t.value):Promise.reject()).catch(function(){document.execCommand('copy')}).finally(function(){document.getElementById('ok').textContent='¡Copiado! ✓'})">Copiar código</button><span id="ok"></span>
+</body></html>
