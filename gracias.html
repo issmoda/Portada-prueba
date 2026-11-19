@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ISS MODA · ¡gracias! (modelo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;600;700&family=Instrument+Serif:ital@0;1&family=Courier+Prime:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Shrikhand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilos.css">
+<style>
+.g-hero{position:relative;text-align:center;padding:46px 18px 34px;background:var(--rosa) var(--grano);overflow:hidden;border-bottom:1px solid var(--beige2)}
+.g-hero .estrella{animation:titila 2.6s ease-in-out infinite,flota 6s ease-in-out infinite}
+.lluvia i{position:absolute;top:-30px;width:14px;height:14px;background:var(--chicle);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);animation:cae linear forwards;opacity:.9}
+.lluvia i:nth-child(3n){background:var(--bordo);width:10px;height:10px}
+.lluvia i:nth-child(4n){background:#fff;width:16px;height:16px}
+@keyframes cae{to{transform:translateY(560px) rotate(540deg);opacity:0}}
+.sobre{width:110px;height:110px;margin:0 auto 14px;border-radius:50%;background:var(--crema);display:grid;place-items:center;box-shadow:0 10px 24px rgba(62,42,34,.14);animation:pegar2 .8s .2s cubic-bezier(.2,1.5,.45,1) both}
+.sobre svg{width:52px;height:52px;stroke:var(--bordo);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.sobre svg path{stroke-dasharray:40;stroke-dashoffset:40;animation:traza .7s 1s ease-out forwards}
+@keyframes traza{to{stroke-dashoffset:0}}
+@keyframes pegar2{from{opacity:0;transform:scale(.3) rotate(-30deg)}}
+.g-hero .caps{display:block;font-size:46px;animation:subeL .8s .5s both}
+.g-hero .it{font-size:64px;display:inline-block;animation:subeL .8s .7s both}
+@keyframes subeL{from{opacity:0;transform:translateY(30px)}}
+.g-hero p{font-size:15px;line-height:1.55;color:var(--vino);max-width:330px;margin:14px auto 0;animation:subeL .8s .9s both}
+.nro{display:inline-block;margin-top:16px;font-family:var(--mono);font-weight:700;font-size:13px;background:#fff;border:1.5px dashed var(--chicle);color:var(--bordo);padding:6px 12px;transform:rotate(-2deg);animation:pegar2 .6s 1.2s cubic-bezier(.2,1.5,.45,1) both}
+
+/* línea de tiempo */
+.pasos{padding:40px 18px 0}
+.linea{position:relative;margin-top:22px;padding-left:44px}
+.linea:before{content:"";position:absolute;left:15px;top:8px;bottom:8px;border-left:2.5px dashed var(--beige2)}
+.linea .avance{position:absolute;left:14px;top:8px;width:4.5px;border-radius:3px;background:var(--chicle);height:0;transition:height 1.6s cubic-bezier(.5,0,.2,1)}
+.paso{position:relative;padding:0 0 26px}
+.paso .bola{position:absolute;left:-44px;top:0;width:32px;height:32px;border-radius:50%;background:#fff;border:2.5px solid var(--beige2);display:grid;place-items:center;font-size:14px;font-weight:700;color:var(--gris);transition:.4s}
+.paso.hecho .bola{background:var(--bordo);border-color:var(--bordo);color:#fff}
+.paso.ahora .bola{border-color:var(--chicle);color:var(--bordo);animation:salta 1.6s infinite}
+.paso h3{font-family:var(--caps);font-size:22px;text-transform:uppercase;color:var(--bordo);line-height:1.05}
+.paso p{font-size:13.5px;color:var(--gris);margin-top:3px;line-height:1.45}
+.paso .moto-mini{width:40px;height:28px;vertical-align:-6px;margin-left:6px}
+
+/* resumen tipo ticket */
+.res{margin:20px 18px 0}
+.res .papel{transform:none;animation:none}
+.res .lin-it{display:flex;gap:10px;align-items:center;padding:6px 0;font-size:13px}
+.res .lin-it img{width:40px;height:52px;object-fit:cover}
+.res .lin-it span{flex:1}
+
+/* acciones */
+.acc{padding:34px 18px 0;display:grid;gap:12px}
+.tarjeta{background:#fff;border:1.5px solid var(--beige2);padding:18px;display:flex;gap:14px;align-items:center}
+.tarjeta .ic{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;flex:none}
+.tarjeta .ic svg{width:24px;height:24px}
+.tarjeta b{display:block;font-family:var(--caps);font-size:19px;text-transform:uppercase;color:var(--bordo);line-height:1.05}
+.tarjeta small{font-size:12.5px;color:var(--gris)}
+.tarjeta .fl{margin-left:auto;font-size:20px;color:var(--chicle)}
+.volver{display:block;text-align:center;margin:30px 18px 0}
+</style>
+</head>
+<body>
+<div class="nota-modelo">Modelo de prueba · así se vería la página después de pagar</div>
+<header>
+  <div class="cab">
+    <span style="width:40px"></span>
+    <a href="index.html"><img class="logo" id="logoCab" alt="ISS MODA"></a>
+    <button class="ico" aria-label="Carrito"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8a3 3 0 016 0"/></svg></button>
+  </div>
+</header>
+
+<section class="g-hero">
+  <div class="lluvia" id="lluvia"></div>
+  <div class="sobre"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+  <span class="caps">¡Gracias por</span><span class="it">elegirnos!</span>
+  <p>Tu pedido ya está con nosotras. Te mandamos todo el detalle por mail y te avisamos cuando salga.</p>
+  <span class="nro" id="nro"></span>
+  <svg class="estrella" style="top:30px;left:30px" viewBox="0 0 24 24"><path d="M12 1l3.2 7 7.6.8-5.7 5.1 1.6 7.6L12 17.6 5.3 21.5l1.6-7.6L1.2 8.8 8.8 8z"/></svg>
+  <svg class="estrella" style="top:120px;right:26px;fill:#fff;width:18px;height:18px;animation-delay:.7s" viewBox="0 0 24 24"><path d="M12 1l3.2 7 7.6.8-5.7 5.1 1.6 7.6L12 17.6 5.3 21.5l1.6-7.6L1.2 8.8 8.8 8z"/></svg>
+</section>
+
+<section class="pasos">
+  <div class="sube in"><span class="caps" style="display:block;font-size:38px">¿Y ahora</span><span class="it" style="font-size:50px">qué pasa?</span></div>
+  <div class="linea" id="linea">
+    <div class="avance" id="avance"></div>
+    <div class="paso hecho"><span class="bola">✓</span><h3>Recibimos tu pedido</h3><p>Ya está confirmado y anotado.</p></div>
+    <div class="paso ahora"><span class="bola">2</span><h3>Lo preparamos</h3><p>Lo armamos con cuidado en nuestro local de San Fernando.</p></div>
+    <div class="paso"><span class="bola">3</span><h3>Sale en moto <svg class="moto-mini" viewBox="0 0 52 36"><rect x="3" y="6" width="15" height="12" rx="2" fill="#E39AB0"/><circle cx="11" cy="28" r="6" fill="none" stroke="#3E2A22" stroke-width="2.6"/><circle cx="41" cy="28" r="6" fill="none" stroke="#3E2A22" stroke-width="2.6"/><path d="M11 28h15l7-13h6l2 13" fill="none" stroke="#3E2A22" stroke-width="2.6" stroke-linejoin="round"/><path d="M36 15l-2-7h-5" fill="none" stroke="#3E2A22" stroke-width="2.6" stroke-linecap="round"/></svg></h3><p>En CABA y AMBA llega en 48 h. Al resto del país, por correo.</p></div>
+    <div class="paso"><span class="bola">4</span><h3>¡Lo estrenás!</h3><p>Si no te queda, tenés 15 días para cambiarlo.</p></div>
+  </div>
+</section>
+
+<section class="res" id="res"></section>
+
+<section class="acc">
+  <a class="tarjeta" href="https://wa.me/5491144208788?text=Hola!%20Hice%20un%20pedido%20y%20tengo%20una%20consulta" target="_blank" rel="noopener"><span class="ic" style="background:#25D366"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2z"/></svg></span><div><b>¿Una duda con tu pedido?</b><small>Escribinos por WhatsApp</small></div><span class="fl">→</span></a>
+  <a class="tarjeta" href="https://www.instagram.com/iss.moda/" target="_blank" rel="noopener"><span class="ic" style="background:var(--rosa2)"><svg viewBox="0 0 24 24" fill="none" stroke="#3E2A22" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#3E2A22"/></svg></span><div><b>Mostranos tu look</b><small>Etiquetanos en @iss.moda</small></div><span class="fl">→</span></a>
+</section>
+<a class="cta volver" href="index.html">Seguir mirando</a>
+
+<footer style="margin-top:40px"><img class="logo" id="logoPie" alt="ISS MODA"><br>© 2026 ISS MODA · San Fernando, Buenos Aires · +30 años</footer>
+
+<script src="comun.js"></script>
+<script>
+var LOGO="https://dcdn-us.mitiendanube.com/stores/977/287/themes/common/logo-3332211776209483737-1788557379-481d02f61b91cc59278f19dbdee0c7291788557379-320-0.webp";
+var $=function(id){return document.getElementById(id)},fmt=window.issFmt;
+$("logoCab").src=$("logoPie").src=LOGO;
+$("nro").textContent="[ pedido de ejemplo #"+(1000+Math.floor(Math.random()*9000))+" ]";
+/* lluvia de estrellitas */
+var ll=$("lluvia");for(var i=0;i<26;i++){var e=document.createElement("i");e.style.left=Math.random()*100+"%";e.style.animationDuration=(2.2+Math.random()*2.2)+"s";e.style.animationDelay=(Math.random()*1.2)+"s";ll.appendChild(e);}
+/* línea de tiempo */
+setTimeout(function(){var h=$("linea").querySelector(".paso.ahora").offsetTop+16;$("avance").style.height=h+"px"},900);
+/* resumen del pedido */
+var o=null;try{o=JSON.parse(localStorage.getItem("issUltimoPedido"))}catch(e){}
+if(o&&o.items&&o.items.length){
+  var h='<div class="papel"><h3>ISS MODA<br>Tu pedido</h3><div class="lin"></div>'+o.items.map(function(x){return '<div class="lin-it"><img src="'+x.img+'" alt=""><span>'+x.cant+' x '+x.n+(x.talle?' · '+x.talle:'')+'</span><b>'+fmt(x.precio*x.cant)+'</b></div>'}).join("")+
+    '<div class="lin2"></div><div class="fila-t"><span>SUBTOTAL</span><span>'+fmt(o.sub)+'</span></div><div class="fila-t ahorro"><span>20% EFECTIVO</span><span>-'+fmt(o.sub*.2)+'</span></div><div class="fila-t total"><span>TOTAL</span><span>'+fmt(o.sub*.8)+'</span></div><div class="barcode"></div><p class="web">gracias por comprar en issmoda.com.ar</p></div>';
+  $("res").innerHTML=h;
+}
+</script>
+</body>
+</html>

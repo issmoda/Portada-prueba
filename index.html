@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ISS MODA · modelo v5</title>
+<title>ISS MODA · modelo v6</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;600;700&family=Instrument+Serif:ital@0;1&family=Courier+Prime:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Shrikhand&display=swap" rel="stylesheet">
 <style>
@@ -396,7 +396,7 @@ footer .logo{height:42px;margin:0 auto 10px;filter:invert(1) brightness(1.6)}
 </style>
 </head>
 <body>
-<div class="nota-modelo">Modelo de prueba v5 · los nombres de las compras y la foto de Luana se cambian por los reales</div>
+<div class="nota-modelo">Modelo de prueba · tocá una prenda para ver su página, sumala al carrito y probá la compra (no se cobra nada)</div>
 
 <div class="progreso" id="progreso"></div>
 <div class="aviso"><div class="aviso-in" id="aviso"></div></div>
@@ -486,7 +486,7 @@ footer .logo{height:42px;margin:0 auto 10px;filter:invert(1) brightness(1.6)}
     <div class="ranura"></div>
     <div class="papel-caja"><div class="papel" id="papel"></div></div>
   </div>
-  <a class="cta" href="#">Llevar el look <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  <a class="cta" href="#" id="llevarLook">Llevar el look <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
   <p class="tip">tocá una prenda para sacarla o sumarla</p>
 </section>
 
@@ -594,7 +594,7 @@ function encaje(el,r){
 
 function tarjeta(p){
   var v=num(p.p),poca=POCAS.some(function(x){return p.n.toLowerCase().indexOf(x.toLowerCase())>-1});
-  return '<a class="pr" href="'+p.link+'" data-n="'+p.n+'"><div class="ft"><img loading="lazy" src="'+p.img+'" alt="'+nombre(p)+'">'+
+  return '<a class="pr" href="'+'producto.html?p='+p.slug+'" data-n="'+p.n+'"><div class="ft"><img loading="lazy" src="'+p.img+'" alt="'+nombre(p)+'">'+
     '<button class="cora" aria-label="Guardar"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></button>'+
     '<svg class="gran-cora" viewBox="0 0 24 24"><path d="M12 21s-8-5-8-11.2A4.6 4.6 0 0112 7a4.6 4.6 0 018 2.8C20 16 12 21 12 21z"/></svg>'+
     (poca?'<span class="ult">Última unidad</span>':'')+'</div>'+
@@ -635,7 +635,7 @@ function armar(){
   function irA(i){hx=(i+HS.length)%HS.length;var p=HS[hx],v=num(p.p);
     document.querySelectorAll("#slides .sl").forEach(function(s,k){s.classList.toggle("on",k===hx)});
     [].forEach.call($("barrasH").children,function(c,k){var b=c.firstChild;b.style.transition="none";b.style.width=(k<hx?100:0)+"%";if(k===hx){void b.offsetWidth;b.style.transition="width "+HD+"ms linear";b.style.width="100%";}});
-    $("etqN").textContent=nombre(p);$("etqE").innerHTML=fmt(v*.8)+'<small>efectivo</small>';$("etqC").textContent="o 2 y 3 cuotas sin interés";$("etqP").href=p.link;
+    $("etqN").textContent=nombre(p);$("etqE").innerHTML=fmt(v*.8)+'<small>efectivo</small>';$("etqC").textContent="o 2 y 3 cuotas sin interés";$("etqP").href='producto.html?p='+p.slug;
     var e=$("etqP");e.classList.remove("pop");void e.offsetWidth;e.classList.add("pop");
     clearTimeout(ht);ht=setTimeout(function(){irA(hx+1)},HD);}
   irA(0);$("hzd").onclick=function(){irA(hx+1)};$("hzi").onclick=function(){irA(hx-1)};
@@ -666,7 +666,7 @@ function armar(){
   var hi=0,si=0,tmr,dur=4000,arr;
   function mostrar(){var h=H[hi],p=q(h.ps[si]);
     $("barras").innerHTML=h.ps.map(function(_,k){return '<i><b style="width:'+(k<si?100:0)+'%"></b></i>'}).join("");
-    $("visorImg").src=p.img;$("visorTit").textContent=nombre(p);$("visorPz").textContent=fmt(num(p.p)*.8)+" en efectivo · 2 y 3 cuotas sin interés";$("visorLink").href=p.link;
+    $("visorImg").src=p.img;$("visorTit").textContent=nombre(p);$("visorPz").textContent=fmt(num(p.p)*.8)+" en efectivo · 2 y 3 cuotas sin interés";$("visorLink").href='producto.html?p='+p.slug;
     var b=$("barras").children[si].firstChild;b.style.transition="none";b.style.width="0";void b.offsetWidth;b.style.transition="width "+dur+"ms linear";b.style.width="100%";
     clearTimeout(tmr);tmr=setTimeout(sig,dur);}
   function sig(){si++;if(si>=H[hi].ps.length){document.querySelectorAll(".hist .anillo")[hi].classList.add("visto");hi++;si=0;if(hi>=H.length)return cerrar();}mostrar();}
@@ -683,6 +683,7 @@ function armar(){
              {b:"Encaje",t:"Look encaje de noche",ps:["Trini","kira","Heart"],f:"brilla lo justo, cómodo toda la noche"},
              {b:"Día",t:"Look día de sol",ps:["mil rayas","Mani short","Heart"],f:"fresco, lindo y listo para el finde"}];
   var li=0,fuera={};
+  window.__look=function(){return {L:LOOKS[li],fuera:fuera}};
   $("looks").innerHTML=LOOKS.map(function(l,i){return '<button data-i="'+i+'"'+(i?'':' class="on"')+'>'+l.b+'</button>'}).join("");
   function ticket(){var L=LOOKS[li],ps=L.ps.map(q),sub=0;
     var h='<h3>ISS MODA<br>'+L.t+'</h3><div class="lin"></div><div class="fotos">'+ps.map(function(p){return '<img src="'+p.img+'" alt="">'}).join("")+'</div><div class="lin2"></div>';
@@ -748,6 +749,14 @@ function compras(){var i=0,n=$("noti");
   function una(){if($("visor").classList.contains("abierto"))return;var v=VENTAS[i++%VENTAS.length],p=q(v[1]);
     $("notiImg").src=p.img;$("notiTxt").innerHTML="<b>"+v[0]+"</b> se llevó "+nombre(p)+" 🛍️";n.classList.add("ve");setTimeout(function(){n.classList.remove("ve")},4500);}
   setTimeout(function(){una();setInterval(una,16000)},7000);}
+</script>
+<script src="comun.js"></script>
+<script>
+/* conexión con producto y carrito (modelo) */
+document.addEventListener("click",function(e){var b=e.target.closest("#llevarLook");if(!b)return;e.preventDefault();
+  var G=window.__look(),L=G.L;L.ps.map(q).forEach(function(p,k){if(G.fuera[k])return;var V=p.vars&&p.vars.find(function(v){return v.ok&&v.stock>0});
+    window.issAgregar({slug:p.slug,n:nombre(p),img:p.img,talle:V&&V.o[0],color:V&&V.o[1],precio:num(p.p),cant:1},false);});window.issAbrirCarrito();});
+window.issSugerencia=function(c){if(!P.length)return null;var en=c.map(function(x){return x.slug});var s=["Heart","Killian","Amanda"].map(q).find(function(p){return p&&en.indexOf(p.slug)<0});if(!s)return null;var V=s.vars&&s.vars.find(function(v){return v.ok&&v.stock>0});return{slug:s.slug,n:nombre(s),img:s.img,talle:V&&V.o[0],color:V&&V.o[1],precio:num(s.p),cant:1};};
 </script>
 </body>
 </html>

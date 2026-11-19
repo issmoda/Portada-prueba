@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ISS MODA · producto (modelo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;600;700&family=Instrument+Serif:ital@0;1&family=Courier+Prime:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Shrikhand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilos.css">
+<style>
+/* ---------- galería ---------- */
+.migas{font-size:11.5px;color:var(--gris);padding:12px 18px 10px}
+.migas a{text-decoration:underline}
+.gal{position:relative}
+.gal-pista{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.gal-pista::-webkit-scrollbar{display:none}
+.gal-pista figure{flex:none;width:100%;aspect-ratio:3/4;scroll-snap-align:center;position:relative;background:var(--nude)}
+.gal-pista img{width:100%;height:100%;object-fit:cover}
+.gal .contador{position:absolute;top:12px;left:12px;z-index:2;font-family:var(--mono);font-size:12px;font-weight:700;background:var(--crema);color:var(--bordo);padding:4px 9px}
+.gal .cora{top:12px;right:12px}
+.gal .ult{bottom:58px}
+.puntos-g{position:absolute;left:0;right:0;bottom:14px;display:flex;justify-content:center;gap:6px;z-index:2}
+.puntos-g i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.55);transition:.3s}
+.puntos-g i.on{width:22px;border-radius:4px;background:#fff}
+.miniaturas{display:flex;gap:8px;padding:10px 18px 0;overflow-x:auto;scrollbar-width:none}
+.miniaturas img{width:54px;height:70px;object-fit:cover;opacity:.55;border:1.5px solid transparent;transition:.25s;flex:none;cursor:pointer}
+.miniaturas img.on{opacity:1;border-color:var(--bordo)}
+.zoom{position:fixed;inset:0;z-index:92;background:var(--crema);display:none;overflow:auto}
+.zoom.ab{display:block;animation:abre .3s}
+.zoom img{width:200%;max-width:none}
+.zoom button{position:fixed;top:12px;right:12px;width:44px;height:44px;border-radius:50%;background:#fff;font-size:26px;color:var(--bordo);box-shadow:0 4px 14px rgba(0,0,0,.15);z-index:2}
+.zoom p{position:fixed;bottom:16px;left:0;right:0;text-align:center;font-size:12px;color:var(--gris)}
+
+/* ---------- info ---------- */
+.info{padding:22px 18px 0;position:relative}
+.info h1{font-family:var(--caps);font-weight:600;font-size:40px;line-height:.95;text-transform:uppercase;color:var(--bordo);margin-top:10px}
+.info h1 em{display:block;font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;font-size:44px;color:var(--bordo)}
+.precio-bloque{margin-top:16px;display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.precio-ef{font-family:var(--caps);font-weight:700;font-size:44px;line-height:.9;color:var(--bordo)}
+.precio-ef small{display:block;font-family:var(--txt);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--chicle);margin-top:4px}
+.precio-lista{padding-bottom:16px}
+.precio-lista del{font-size:15px;color:var(--gris)}
+.ahorro-chip{display:inline-block;font-family:var(--mono);font-weight:700;font-size:12px;background:var(--rosa2);color:var(--bordo);padding:3px 8px;margin-left:4px;transform:rotate(-2deg)}
+.cuotas-l{font-size:13.5px;color:var(--tinta);margin-top:8px}
+.opcion{margin-top:22px}
+.opcion-t{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;margin-bottom:9px}
+.opcion-t b{font-weight:700}
+.opcion-t button{font-size:12.5px;text-decoration:underline;color:var(--bordo)}
+.colores{display:flex;gap:10px;flex-wrap:wrap}
+.colores button{width:40px;height:40px;border-radius:50%;padding:3px;border:1.5px solid transparent;transition:.2s;position:relative}
+.colores button span{display:block;width:100%;height:100%;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.colores button.on{border-color:var(--bordo);transform:scale(1.08)}
+.colores button.agotado:after{content:"";position:absolute;left:4px;right:4px;top:50%;height:1.5px;background:var(--bordo);transform:rotate(-45deg)}
+.colores button.agotado{opacity:.4}
+.talles{display:flex;gap:8px;flex-wrap:wrap}
+.talles button{min-width:52px;padding:11px 12px;border:1.5px solid var(--beige2);background:#fff;font-family:var(--caps);font-size:17px;transition:.2s}
+.talles button.on{background:var(--bordo);border-color:var(--bordo);color:#fff;transform:rotate(-2deg)}
+.talles button:disabled{opacity:.35;text-decoration:line-through}
+.stock{margin-top:12px;font-size:13.5px;display:flex;align-items:center;gap:8px;min-height:20px}
+.stock i{width:8px;height:8px;border-radius:50%;background:#2E9E5B;flex:none}
+.stock.poco i{background:var(--chicle);animation:salta 1.4s infinite}
+.stock.poco b{color:var(--bordo)}
+.comprar{display:flex;gap:10px;margin-top:18px}
+.cant{display:flex;align-items:center;border:1.5px solid var(--beige2);background:#fff}
+.cant button{width:38px;height:100%;font-size:18px;color:var(--bordo)}
+.cant span{min-width:22px;text-align:center}
+.comprar .cta{flex:1}
+.cta[disabled]{opacity:.45;pointer-events:none}
+.cta.ok{background:#2E7D52;box-shadow:4px 4px 0 #A9D9BC}
+.confianza{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
+.confianza div{text-align:center;padding:12px 4px;border-top:1.5px solid var(--beige2)}
+.confianza svg{width:22px;height:22px;stroke:var(--bordo);fill:none;stroke-width:1.6;margin:0 auto 6px;display:block}
+.confianza b{display:block;font-size:12px;line-height:1.2}
+.confianza small{font-size:11px;color:var(--gris)}
+
+/* ---------- envío compacto ---------- */
+.envio-p{margin:22px 18px 0;background:#fff;border:1.5px solid var(--beige2);padding:16px}
+.envio-p h3{font-family:var(--caps);font-size:22px;text-transform:uppercase;color:var(--bordo);display:flex;align-items:center;gap:10px}
+.envio-p h3 svg{width:40px;height:28px}
+.envio-p .chips{padding:12px 0 6px}
+.envio-p .resp{margin:6px 0 0;border:0;padding:0}
+.envio-p .resp:after{display:none}
+.envio-p .resp h3{font-size:20px}
+.falta{margin-top:12px;font-size:12.5px;color:var(--gris);border-top:1px dashed var(--beige2);padding-top:10px}
+.falta b{color:var(--bordo)}
+
+/* ---------- completá el look ---------- */
+.look-p{margin-top:40px;background:#E9E6E3 var(--grano);padding:34px 18px 30px}
+.look-p .caps{font-size:38px}.look-p .it{font-size:48px}
+.combo{display:flex;align-items:center;gap:6px;margin-top:20px}
+.combo .c{flex:1;position:relative;cursor:pointer}
+.combo .c img{width:100%;aspect-ratio:3/4;object-fit:cover;transition:.3s}
+.combo .c.fuera img{opacity:.35;filter:grayscale(.6)}
+.combo .c .chk{position:absolute;top:6px;right:6px;width:24px;height:24px;background:#fff;border:1.5px solid var(--bordo);display:grid;place-items:center;font-weight:700;font-size:13px;color:var(--bordo)}
+.combo .c p{font-family:var(--caps);font-size:12.5px;text-transform:uppercase;line-height:1.1;margin-top:6px}
+.combo .c small{font-size:12px;color:var(--bordo);font-weight:700}
+.combo .mas{font-family:var(--serif);font-size:30px;color:var(--chicle);flex:none}
+.combo-total{display:flex;justify-content:space-between;align-items:center;margin-top:18px;gap:12px}
+.combo-total p{font-size:12.5px;color:var(--gris)}
+.combo-total b{display:block;font-family:var(--caps);font-size:30px;color:var(--bordo)}
+.combo-total .cta{padding:14px 18px;font-size:16px}
+
+/* ---------- detalles ---------- */
+.det{padding:36px 18px 0}
+.det details{border-bottom:1px solid var(--beige2)}
+.det summary{list-style:none;cursor:pointer;padding:18px 0;font-family:var(--caps);font-size:20px;text-transform:uppercase;color:var(--bordo);display:flex;justify-content:space-between}
+.det summary::-webkit-details-marker{display:none}
+.det summary:after{content:"+";font-family:var(--txt);color:var(--chicle);font-size:22px;transition:transform .3s}
+.det details[open] summary:after{transform:rotate(45deg)}
+.det .cuerpo{font-size:14.5px;line-height:1.6;color:var(--tinta);padding:0 0 18px}
+.det .falta-dato{font-family:var(--mono);font-size:12.5px;background:#FFF4C2;color:#5a4a00;padding:8px 10px;display:block}
+.relacionados{padding:44px 0 10px}
+
+/* ---------- hoja "¿qué talle soy?" ---------- */
+.hoja-fondo{position:fixed;inset:0;background:rgba(43,32,28,.45);z-index:93;opacity:0;pointer-events:none;transition:.3s}
+.hoja-fondo.ab{opacity:1;pointer-events:auto}
+.hoja{position:fixed;left:0;right:0;bottom:0;z-index:94;background:var(--crema);border-radius:22px 22px 0 0;padding:10px 20px 26px;transform:translateY(105%);transition:transform .45s cubic-bezier(.2,1,.3,1);max-width:520px;margin:0 auto}
+.hoja.ab{transform:none}
+.hoja:before{content:"";display:block;width:44px;height:4px;border-radius:2px;background:var(--beige2);margin:0 auto 14px}
+.hoja h3{font-family:var(--caps);font-size:30px;text-transform:uppercase;color:var(--bordo);line-height:1}
+.hoja h3 i{font-family:var(--serif);text-transform:none;font-weight:400}
+.hoja p{font-size:14px;line-height:1.55;margin-top:10px}
+.hoja label{display:block;font-size:12.5px;font-weight:700;margin-top:14px}
+.hoja input,.hoja select{width:100%;margin-top:5px;padding:11px 12px;border:1.5px solid var(--beige2);background:#fff;font:inherit;font-size:15px}
+.hoja .cta{margin-top:18px;width:100%;background:#25D366;box-shadow:4px 4px 0 #A6E9C0}
+
+/* ---------- barra fija ---------- */
+.fija{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(255,253,250,.94);backdrop-filter:blur(14px);border-top:1px solid var(--beige2);display:flex;align-items:center;gap:10px;padding:10px 12px;transform:translateY(110%);transition:transform .45s cubic-bezier(.2,1.2,.4,1)}
+.fija.ve{transform:none}
+.fija img{width:42px;height:54px;object-fit:cover}
+.fija div{flex:1;min-width:0}
+.fija b{display:block;font-family:var(--caps);font-size:20px;color:var(--bordo);line-height:1}
+.fija small{font-size:11px;color:var(--gris);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.fija .cta{padding:13px 16px;font-size:15px}
+body.con-fija .wa{bottom:86px}
+</style>
+</head>
+<body>
+<div class="progreso" id="progreso"></div>
+<div class="nota-modelo">Modelo de prueba · página de producto con fotos, talles y stock reales de la tienda</div>
+<div class="aviso"><div class="aviso-in" id="aviso"></div></div>
+<header>
+  <div class="cab">
+    <button class="ico" aria-label="Menú" onclick="location.href='index.html'"><svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h12M3 17h18"/></svg></button>
+    <a href="index.html"><img class="logo" id="logoCab" alt="ISS MODA"></a>
+    <div style="display:flex">
+      <button class="ico" aria-label="Favoritas"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg><em id="nFav">0</em></button>
+      <button class="ico" aria-label="Carrito"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8a3 3 0 016 0"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<nav class="migas" id="migas"></nav>
+
+<section class="gal" id="gal">
+  <span class="contador" id="contador">1 / 1</span>
+  <button class="cora" id="corazon" aria-label="Guardar"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></button>
+  <div class="gal-pista" id="pista"></div>
+  <div class="puntos-g" id="puntosG"></div>
+</section>
+<div class="miniaturas" id="minis"></div>
+<div class="zoom" id="zoom"><button id="zoomX" aria-label="Cerrar">×</button><img id="zoomImg" alt=""><p>Deslizá para recorrer la foto</p></div>
+
+<section class="info">
+  <span class="corchete" id="catTag"></span>
+  <h1 id="titulo"></h1>
+  <div class="precio-bloque">
+    <div class="precio-ef" id="pEf"></div>
+    <div class="precio-lista"><del id="pLista"></del><span class="ahorro-chip" id="pAhorro"></span></div>
+  </div>
+  <p class="cuotas-l" id="pCuotas"></p>
+
+  <div class="opcion" id="opColor"><div class="opcion-t"><span>Color: <b id="colorSel"></b></span></div><div class="colores" id="colores"></div></div>
+  <div class="opcion" id="opTalle"><div class="opcion-t"><span>Talle: <b id="talleSel"></b></span><button id="abrirTalle">¿Qué talle soy?</button></div><div class="talles" id="talles"></div></div>
+  <p class="stock" id="stock"></p>
+
+  <div class="comprar" id="zonaComprar">
+    <div class="cant"><button id="menos">−</button><span id="cant">1</span><button id="mas">+</button></div>
+    <button class="cta" id="agregar">Agregar al carrito</button>
+  </div>
+
+  <div class="confianza">
+    <div><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0114-5l2 2M20 12a8 8 0 01-14 5l-2-2"/><path d="M20 4v5h-5M4 20v-5h5"/></svg><b>Cambios</b><small>hasta 15 días</small></div>
+    <div><svg viewBox="0 0 24 24"><path d="M4 10l8-6 8 6v10H4z"/><path d="M10 20v-6h4v6"/></svg><b>Local en</b><small>San Fernando</small></div>
+    <div><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg><b>Compra</b><small>protegida</small></div>
+  </div>
+</section>
+
+<section class="envio-p">
+  <h3><svg viewBox="0 0 52 36"><rect x="3" y="6" width="15" height="12" rx="2" fill="#E39AB0"/><circle cx="11" cy="28" r="6" fill="none" stroke="#3E2A22" stroke-width="2.6"/><circle cx="41" cy="28" r="6" fill="none" stroke="#3E2A22" stroke-width="2.6"/><path d="M11 28h15l7-13h6l2 13" fill="none" stroke="#3E2A22" stroke-width="2.6" stroke-linejoin="round"/><path d="M36 15l-2-7h-5" fill="none" stroke="#3E2A22" stroke-width="2.6" stroke-linecap="round"/></svg>¿Cuándo te llega?</h3>
+  <div class="chips" id="zonas" style="padding-left:0;padding-right:0"></div>
+  <div class="resp" id="resp"></div>
+  <p class="falta" id="falta"></p>
+</section>
+
+<section class="look-p">
+  <div class="sube"><span class="caps" style="display:block">Completá</span><span class="it">el look</span></div>
+  <div class="combo" id="combo"></div>
+  <div class="combo-total"><div><p>El look en efectivo</p><b id="comboTotal"></b></div><button class="cta" id="comboAgregar">Sumar al carrito</button></div>
+</section>
+
+<section class="det">
+  <details open><summary>Detalles</summary><div class="cuerpo" id="desc"></div></details>
+  <details><summary>Medidas y talles</summary><div class="cuerpo"><span class="falta-dato">[ en la tienda real: la tabla de medidas de esta prenda, en centímetros ]</span><p style="margin-top:10px">¿Dudás entre dos talles? Escribinos con tu altura y el talle que usás siempre y te decimos cuál te queda mejor.</p></div></details>
+  <details><summary>Envíos</summary><div class="cuerpo">En CABA y todo AMBA te lo llevamos en moto en 48 h, desde $4.500. Al resto del país va por Correo Argentino o Andreani. Superando los $100.000, el envío es gratis.</div></details>
+  <details><summary>Cambios</summary><div class="cuerpo">Tenés 15 días para cambiarlo. La prenda tiene que estar sin uso, con sus etiquetas y en su empaque.</div></details>
+  <details><summary>Formas de pago</summary><div class="cuerpo">20% off pagando en efectivo o transferencia. Con tarjeta, 2 y 3 cuotas sin interés.</div></details>
+</section>
+
+<section class="relacionados">
+  <div class="tit sube"><span class="caps" style="display:block">Te puede</span><span class="it">gustar</span></div>
+  <div class="carril" id="relac" style="margin-top:16px"></div>
+</section>
+
+<footer style="margin-top:40px"><img class="logo" id="logoPie" alt="ISS MODA"><br>© 2026 ISS MODA · San Fernando, Buenos Aires · +30 años</footer>
+
+<div class="hoja-fondo" id="hojaF"></div>
+<div class="hoja" id="hoja">
+  <h3>¿Qué talle <i>soy?</i></h3>
+  <p>Contanos y te respondemos por WhatsApp cuál te queda mejor. Lo vemos una persona, no un robot.</p>
+  <label>Tu altura<input id="hAlt" inputmode="numeric" placeholder="ej.: 1,65"></label>
+  <label>Talle que usás siempre<select id="hTal"><option>XS</option><option selected>S</option><option>M</option><option>L</option><option>XL</option></select></label>
+  <a class="cta" id="hEnviar" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
+</div>
+
+<div class="fija" id="fija"><img id="fijaImg" alt=""><div><b id="fijaPz"></b><small id="fijaN"></small></div><button class="cta" id="fijaBtn">Agregar</button></div>
+
+<a class="wa" href="https://wa.me/5491144208788" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2z"/></svg></a>
+
+<script src="comun.js"></script>
+<script>
+var LOGO="https://dcdn-us.mitiendanube.com/stores/977/287/themes/common/logo-3332211776209483737-1788557379-481d02f61b91cc59278f19dbdee0c7291788557379-320-0.webp";
+var $=function(id){return document.getElementById(id)},fmt=window.issFmt,P=[],X,sel={talle:null,color:null},cant=1;
+var nombre=function(p){return p.n.replace(/\s*\/\/\s*/g," ")};
+var num=function(s){return parseInt(String(s).replace(/\D/g,""))||0};
+var q=function(n){return P.find(function(p){return p.n.toLowerCase().indexOf(n.toLowerCase())>-1})};
+var HEX={chocolate:"#5A3A2A",negro:"#141210",blanco:"#FFFFFF",verde:"#6B8F5E",beige:"#E3D3BE",crema:"#F1E7D6",natural:"#EFE6D6",gris:"#9C9A97",rosa:"#E8A7B8",celeste:"#9CC9E3",lila:"#C8A2E0",violeta:"#8E6BB5",marron:"#6B4A35",marrón:"#6B4A35",camel:"#B58252",amarillo:"#F1D36B",rojo:"#B3262E",bordo:"#5E1428",azul:"#2B3F6B",nude:"#E4C9B4",vison:"#B8A595",visón:"#B8A595",tostado:"#A8774F",habano:"#8B5A3C"};
+var hex=function(c){var k=String(c||"").toLowerCase().trim();return HEX[k]||HEX[k.split(" ")[0]]||"#D9CFC6"};
+
+$("aviso").innerHTML=Array(2).fill('<span>Envío en moto en 48 h · CABA y AMBA desde $4.500</span><i>★</i><span>20% off en efectivo o transferencia</span><i>★</i><span>2 y 3 cuotas sin interés</span><i>★</i><span>Envío gratis desde $100.000</span><i>★</i>').join("");
+$("logoCab").src=$("logoPie").src=LOGO;
+
+fetch("productos.json").then(function(r){return r.json()}).then(function(d){
+  P=d;var slug=new URLSearchParams(location.search).get("p");
+  X=P.find(function(p){return p.slug===slug})||q("Reina");armar();
+});
+
+function variantes(){return (X.vars&&X.vars.length?X.vars:[{o:["Único"],stock:1,ok:true,precio:num(X.p)}]);}
+function opciones(){var V=variantes(),T=[],C=[];V.forEach(function(v){if(v.o[0]&&T.indexOf(v.o[0])<0)T.push(v.o[0]);if(v.o[1]&&C.indexOf(v.o[1])<0)C.push(v.o[1]);});return{T:T,C:C};}
+function stockDe(t,c){var v=variantes().find(function(v){return v.o[0]===t&&(!c||v.o[1]===c)});return v?(v.ok?v.stock:0):0;}
+function stockColor(c){return variantes().filter(function(v){return v.o[1]===c}).reduce(function(a,v){return a+(v.ok?v.stock:0)},0);}
+
+function armar(){
+  document.title=nombre(X)+" · ISS MODA (modelo)";
+  var v=num(X.p),partes=nombre(X).split(" ");
+  $("migas").innerHTML='<a href="index.html">Inicio</a> / '+(X.cat||"Productos")+' / '+nombre(X);
+  $("catTag").textContent="[ "+(X.cat||"nueva temporada").toLowerCase()+" ]";
+  $("titulo").innerHTML=partes[0]+'<em>'+partes.slice(1).join(" ").toLowerCase()+'</em>';
+  $("pEf").innerHTML=fmt(v*.8)+'<small>en efectivo o transferencia</small>';
+  $("pLista").textContent=fmt(v);$("pAhorro").textContent="ahorrás "+fmt(v*.2);
+  $("pCuotas").innerHTML="o <b>3 cuotas sin interés de "+fmt(v/3)+"</b> (también en 2)";
+
+  /* galería */
+  var I=X.imgs&&X.imgs.length?X.imgs:[X.img];
+  $("pista").innerHTML=I.map(function(u,i){return '<figure><img src="'+u+'" alt="'+nombre(X)+' foto '+(i+1)+'"'+(i?' loading="lazy"':'')+'></figure>'}).join("");
+  $("puntosG").innerHTML=I.map(function(_,i){return '<i'+(i?'':' class="on"')+'></i>'}).join("");
+  $("minis").innerHTML=I.map(function(u,i){return '<img src="'+u+'" data-i="'+i+'"'+(i?'':' class="on"')+' alt="">'}).join("");
+  var pista=$("pista");
+  pista.addEventListener("scroll",function(){var i=Math.round(pista.scrollLeft/pista.clientWidth);$("contador").textContent=(i+1)+" / "+I.length;
+    [].forEach.call($("puntosG").children,function(d,k){d.classList.toggle("on",k===i)});[].forEach.call($("minis").children,function(d,k){d.classList.toggle("on",k===i)});},{passive:true});
+  $("contador").textContent="1 / "+I.length;
+  $("minis").onclick=function(e){var m=e.target.closest("img");if(m)pista.scrollTo({left:+m.dataset.i*pista.clientWidth,behavior:"smooth"});};
+  var ult=0;pista.addEventListener("click",function(e){var ahora=Date.now();if(ahora-ult<330){fav(true);ult=0;clearTimeout(window.__z);return;}ult=ahora;var img=e.target.closest("img");window.__z=setTimeout(function(){if(img){$("zoomImg").src=img.src;$("zoom").classList.add("ab");document.body.style.overflow="hidden";var z=$("zoom");setTimeout(function(){z.scrollLeft=(z.scrollWidth-z.clientWidth)/2;z.scrollTop=(z.scrollHeight-z.clientHeight)/3},30);}},340);});
+  $("zoomX").onclick=function(){$("zoom").classList.remove("ab");document.body.style.overflow="";};
+
+  /* favoritas */
+  var FAV={};try{FAV=JSON.parse(localStorage.getItem("issFav")||"{}")}catch(e){}
+  function pint(){$("corazon").classList.toggle("si",!!FAV[X.n]);$("nFav").textContent=Object.keys(FAV).length;}
+  window.fav=function(forzar){if(FAV[X.n]&&!forzar)delete FAV[X.n];else FAV[X.n]=1;try{localStorage.setItem("issFav",JSON.stringify(FAV))}catch(e){}pint();if(forzar)window.issToast("Guardado en favoritas ♡");};
+  $("corazon").onclick=function(){fav()};pint();
+
+  /* talles y colores con stock real */
+  var O=opciones();
+  if(!O.C.length)$("opColor").style.display="none";
+  $("colores").innerHTML=O.C.map(function(c){return '<button data-c="'+c+'" class="'+(stockColor(c)?"":"agotado")+'" aria-label="'+c+'"><span style="background:'+hex(c)+'"></span></button>'}).join("");
+  sel.color=O.C.find(function(c){return stockColor(c)})||O.C[0]||null;
+  sel.talle=null;
+  function pintarTalles(){
+    $("talles").innerHTML=O.T.map(function(t){var s=stockDe(t,sel.color);return '<button data-t="'+t+'"'+(s?'':' disabled')+(sel.talle===t?' class="on"':'')+'>'+t+'</button>'}).join("");
+    if(!sel.talle){var p=O.T.find(function(t){return stockDe(t,sel.color)});if(O.T.length===1||p&&O.T.length===1)sel.talle=p;}
+    [].forEach.call($("talles").children,function(b){b.classList.toggle("on",b.dataset.t===sel.talle)});
+    [].forEach.call($("colores").children,function(b){b.classList.toggle("on",b.dataset.c===sel.color)});
+    $("colorSel").textContent=sel.color||"";$("talleSel").textContent=sel.talle||"elegí uno";
+    var s=sel.talle?stockDe(sel.talle,sel.color):0,st=$("stock");
+    if(!sel.talle){st.className="stock";st.innerHTML="";}
+    else if(!s){st.className="stock";st.innerHTML="Sin stock en esta combinación";}
+    else if(s<=3){st.className="stock poco";st.innerHTML='<i></i><span>¡Quedan <b>'+s+(s===1?' unidad':' unidades')+'</b> en este talle!</span>';}
+    else{st.className="stock";st.innerHTML='<i></i><span>En stock, listo para enviar</span>';}
+    var btn=$("agregar");btn.disabled=!(sel.talle&&s);btn.textContent=!sel.talle?"Elegí tu talle":(s?"Agregar al carrito":"Sin stock");
+    cant=Math.min(cant,Math.max(1,s));$("cant").textContent=cant;
+    $("fijaPz").textContent=fmt(v*.8)+" efectivo";$("fijaN").textContent=nombre(X)+(sel.talle?" · "+sel.talle:"")+(sel.color?" · "+sel.color:"");
+  }
+  pintarTalles();
+  $("colores").onclick=function(e){var b=e.target.closest("button");if(!b)return;sel.color=b.dataset.c;if(sel.talle&&!stockDe(sel.talle,sel.color))sel.talle=null;pintarTalles();
+    var idx=I.findIndex(function(){return false});};
+  $("talles").onclick=function(e){var b=e.target.closest("button");if(!b||b.disabled)return;sel.talle=b.dataset.t;pintarTalles();};
+  $("menos").onclick=function(){cant=Math.max(1,cant-1);$("cant").textContent=cant};
+  $("mas").onclick=function(){var s=sel.talle?stockDe(sel.talle,sel.color):1;if(cant<s){cant++;$("cant").textContent=cant}else window.issToast("No hay más unidades en este talle");};
+  function agregar(){
+    if(!sel.talle){$("opTalle").scrollIntoView({behavior:"smooth",block:"center"});var t=$("talles");t.style.animation="none";void t.offsetWidth;t.style.animation="salta .5s";window.issToast("Elegí tu talle primero");return;}
+    window.issAgregar({slug:X.slug,n:nombre(X),img:I[0],talle:sel.talle,color:sel.color,precio:v,cant:cant});
+    var b=$("agregar");b.classList.add("ok");b.textContent="¡Agregado! ✓";setTimeout(function(){b.classList.remove("ok");pintarTalles();},1800);
+  }
+  $("agregar").onclick=agregar;$("fijaBtn").onclick=agregar;$("fijaImg").src=I[0];
+  new IntersectionObserver(function(es){var ve=!es[0].isIntersecting&&es[0].boundingClientRect.top<0;$("fija").classList.toggle("ve",ve);document.body.classList.toggle("con-fija",ve);}).observe($("zonaComprar"));
+
+  /* ¿qué talle soy? */
+  function hoja(ab){$("hoja").classList.toggle("ab",ab);$("hojaF").classList.toggle("ab",ab);}
+  $("abrirTalle").onclick=function(){hoja(true)};$("hojaF").onclick=function(){hoja(false)};
+  function linkWA(){var t="Hola! Mido "+($("hAlt").value||"__")+" y uso talle "+$("hTal").value+". ¿Qué talle me recomendás del "+nombre(X)+"?";$("hEnviar").href="https://wa.me/5491144208788?text="+encodeURIComponent(t);}
+  $("hAlt").oninput=linkWA;$("hTal").onchange=linkWA;linkWA();
+
+  /* envío por zona */
+  var ZN=[["CABA","Llega en 48 h, en moto","Te lo llevamos a tu casa.","Desde $4.500"],["Zona Norte","Llega en 48 h, en moto","Estamos en San Fernando: Zona Norte es nuestra casa.","Desde $4.500"],["Resto de AMBA","Llega en 48 h, en moto","Te lo llevamos a todo el AMBA.","Desde $4.500"],["Interior","Llega a todo el país","Por Correo Argentino o Andreani. El costo lo ves con tu código postal.","Gratis desde $100.000"]];
+  $("zonas").innerHTML=ZN.map(function(z,i){return '<button data-i="'+i+'">'+z[0]+'</button>'}).join("");
+  function zona(i){[].forEach.call($("zonas").children,function(b,k){b.classList.toggle("on",k===i)});var z=ZN[i];$("resp").innerHTML='<h3>'+z[1]+'</h3><p>'+z[2]+'</p><span class="precio">'+z[3]+'</span>';var r=$("resp");r.classList.remove("cambia");void r.offsetWidth;r.classList.add("cambia");}
+  zona(1);$("zonas").onclick=function(e){var b=e.target.closest("button");if(b)zona(+b.dataset.i)};
+  var falta=100000-v;$("falta").innerHTML=falta>0?'Con esta prenda te faltan <b>'+fmt(falta)+'</b> para el <b>envío gratis</b>.':'¡Con esta prenda ya tenés <b>envío gratis</b>!';
+
+  /* completá el look */
+  var PAR={"Vestidos y monos":["Heart","Amanda"],"Camisas y Blusas":["kira","Thomas"],"Tops y Bodys":["Tenaz","Heart"],"Faldas, shorts y minis":["Killian","Reme mil rayas"],"Sastreria":["Thomas","Heart"],"Remeras":["Mani short","Heart"],"Jeans y Pantalones":["Anna","Heart"],"Accesorios":["Reina","Amanda"]};
+  var par=(PAR[X.cat]||["Heart","Killian"]).map(q).filter(function(p){return p&&p.slug!==X.slug});
+  if(X.cat==="Sastreria"&&/Thomas/.test(X.n))par[0]=q("Amanda");
+  var L=[X].concat(par).slice(0,3),fuera={};
+  function combo(){var tot=0;$("combo").innerHTML=L.map(function(p,i){var ef=num(p.p)*.8;if(!fuera[i])tot+=ef;return (i?'<span class="mas">+</span>':'')+'<div class="c'+(fuera[i]?' fuera':'')+'" data-i="'+i+'"><img src="'+p.img+'" alt=""><span class="chk">'+(fuera[i]?'':'✓')+'</span><p>'+nombre(p)+'</p><small>'+fmt(ef)+'</small></div>'}).join("");$("comboTotal").textContent=fmt(tot);}
+  combo();
+  $("combo").onclick=function(e){var c=e.target.closest(".c");if(!c)return;var i=+c.dataset.i;if(i===0){window.issToast("Esta es la prenda que estás mirando");return;}fuera[i]=!fuera[i];combo();};
+  $("comboAgregar").onclick=function(){if(!sel.talle){agregar();return;}L.forEach(function(p,i){if(fuera[i])return;var V=p.vars&&p.vars.find(function(v){return v.ok&&v.stock>0});
+    window.issAgregar({slug:p.slug,n:nombre(p),img:p.img,talle:i?(V&&V.o[0]):sel.talle,color:i?(V&&V.o[1]):sel.color,precio:num(p.p),cant:1},false);});window.issAbrirCarrito();};
+
+  /* descripción */
+  $("desc").innerHTML=X.desc?X.desc.replace(/\n+/g,"<br>"):'<span class="falta-dato">[ esta prenda no tiene descripción en Tiendanube: conviene cargar tela, calce y qué talle usa la modelo ]</span>';
+
+  /* relacionados */
+  var rel=P.filter(function(p){return p.slug!==X.slug&&p.cat===X.cat}).concat(P.filter(function(p){return p.slug!==X.slug&&p.cat!==X.cat})).slice(0,6);
+  $("relac").innerHTML=rel.map(function(p){var w=num(p.p);return '<a class="pr" href="producto.html?p='+p.slug+'"><div class="ft"><img loading="lazy" src="'+p.img+'" alt=""></div><h3>'+nombre(p)+'</h3><div class="pz"><span class="ef">'+fmt(w*.8)+'<small>efectivo</small></span><del>'+fmt(w)+'</del></div></a>'}).join("");
+  new IntersectionObserver(function(es,o){if(es[0].isIntersecting){$("relac").classList.add("in");o.disconnect();}},{threshold:.2}).observe($("relac"));
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.15});
+  document.querySelectorAll(".sube").forEach(function(el){io.observe(el)});
+}
+/* sugerencia del carrito: algo que combine y no esté */
+window.issSugerencia=function(c){if(!P.length)return null;var en=c.map(function(x){return x.slug});var s=["Heart","Killian","Amanda"].map(q).find(function(p){return p&&en.indexOf(p.slug)<0});if(!s)return null;var V=s.vars&&s.vars.find(function(v){return v.ok&&v.stock>0});return{slug:s.slug,n:nombre(s),img:s.img,talle:V&&V.o[0],color:V&&V.o[1],precio:num(s.p),cant:1};};
+addEventListener("scroll",function(){var H=document.documentElement.scrollHeight-innerHeight;$("progreso").style.transform="scaleX("+(H>0?scrollY/H:0)+")";},{passive:true});
+</script>
+</body>
+</html>
