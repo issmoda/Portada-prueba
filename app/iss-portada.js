@@ -4,8 +4,8 @@
  * Lee productos, precios y stock en vivo. Si algo falla, queda la página de siempre del tema. */
 (function () {
   "use strict";
-  var VERSION = "20261119-1832";
-  var MODOS = {"home": "todos", "producto": "prueba", "listado": "prueba", "paginas": "prueba", "e404": "prueba", "cuenta": "prueba", "carrito": "prueba", "menu": "prueba"};
+  var VERSION = "20261119-1835";
+  var MODOS = {"home": "todos", "producto": "todos", "listado": "todos", "paginas": "todos", "e404": "todos", "cuenta": "todos", "carrito": "todos", "menu": "todos"};
   if (window.__issPortada) return;
   window.__issPortada = VERSION;
   var LS = window.LS || {};
