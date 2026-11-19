@@ -5,8 +5,8 @@
  * Si algo falla, se quita sola y queda la portada de siempre del tema. */
 (function () {
   "use strict";
-  var MODO = "prueba";
-  var VERSION = "20261119-1642";
+  var MODO = "todos";
+  var VERSION = "20261119-1645";
   if (window.__issPortada) return;
   window.__issPortada = VERSION;
   var LS = window.LS || {};
