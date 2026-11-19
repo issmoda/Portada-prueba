@@ -31,6 +31,14 @@
 .firma-q p{font-family:var(--serif);font-style:italic;font-size:34px;color:var(--bordo)}
 .firma-q small{color:var(--gris);font-size:13px}
 .visitanos{margin:44px 18px 0}
+.nosotras{padding:44px 18px 0}
+.tres{display:grid;gap:14px;margin-top:20px}
+.pers{position:relative;background:#fff;border:1.5px solid var(--beige2);padding:18px 18px 18px 84px;min-height:96px}
+.pers .ini{position:absolute;left:16px;top:18px;width:52px;height:52px;border-radius:50%;background:var(--rosa2);display:grid;place-items:center;font-family:var(--serif);font-style:italic;font-size:30px;color:var(--bordo)}
+.pers b{display:block;font-family:var(--caps);font-size:26px;text-transform:uppercase;color:var(--bordo);line-height:1}
+.pers small{display:inline-block;margin-top:4px;font-family:var(--mono);font-size:11.5px;font-weight:700;background:var(--rosa);color:var(--bordo);padding:2px 7px}
+.pers p{font-size:14px;color:var(--tinta);margin-top:8px;line-height:1.45}
+@media(min-width:760px){.tres{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 <body>
@@ -40,7 +48,7 @@
   <span class="caps" style="margin-top:12px">Una empresa</span><span class="it">de familia</span>
   <div class="q-foto">
     <div class="cinta-adh"></div>
-    <div class="polaroid"><img src="https://d26lpennugtm8s.cloudfront.net/stores/977/287/rte/IMG_8329.jpg" alt="El equipo de ISS MODA"><span>Team ISS 🤍</span></div>
+    <div class="polaroid"><img src="https://d26lpennugtm8s.cloudfront.net/stores/977/287/rte/IMG_8329.jpg" alt="El equipo de ISS MODA"><span>Alejandra, Luana y Oriana 🤍</span></div>
     <span class="sticker-txt" style="--r:-8deg">+30 años</span>
   </div>
 </section>
@@ -49,9 +57,18 @@
   <div><b data-to="2">2</b><span>generaciones</span></div>
   <div><b>1</b><span>local en<br>San Fernando</span></div>
 </div>
+<section class="nosotras">
+  <div class="sube" style="text-align:center"><span class="caps" style="display:block;font-size:40px">Somos</span><span class="it" style="font-size:56px">nosotras</span></div>
+  <div class="tres">
+    <div class="pers pega" style="--r:-6deg;--r2:-3deg"><span class="ini">A</span><b>Alejandra</b><small>Fundadora</small><p>La que empezó todo, hace más de 30 años.</p></div>
+    <div class="pers pega" style="--r:5deg;--r2:2deg"><span class="ini">L</span><b>Luana</b><small>Segunda generación</small><p>Elige cada prenda y te responde por WhatsApp.</p></div>
+    <div class="pers pega" style="--r:-4deg;--r2:-1.5deg"><span class="ini">O</span><b>Oriana</b><small>Segunda generación</small><p>Hermana de Luana y parte del equipo de siempre.</p></div>
+  </div>
+</section>
+
 <section class="capitulos">
   <div class="capi sube"><span class="n">01</span><h3>Todo empezó en familia</h3><p>Hace más de 30 años que vestimos mujeres, y hoy somos dos generaciones al frente. Ponemos tiempo, dedicación y pasión en cada detalle: desde las prendas hasta la atención.</p></div>
-  <div class="capi sube"><span class="n">02</span><h3>Lo clásico y lo atrevido</h3><p>Cada temporada conviven estilos muy distintos, porque creemos que la moda es una forma de expresión. Tenemos una amplia variedad de talles para que todas encuentren prendas que las hagan sentir cómodas y seguras.</p></div>
+  <div class="capi sube"><span class="n">02</span><h3>Lo clásico y lo atrevido</h3><p>Cada temporada conviven estilos muy distintos, porque creemos que la moda es una forma de expresión. Elegimos cada prenda para que te sientas cómoda, segura y vos misma.</p></div>
   <div class="capi sube"><span class="n">03</span><h3>Te acompañamos</h3><p>Podés consultarnos lo que quieras: nuestras asesoras te ayudan a elegir lo mejor para vos, en el local o por WhatsApp.</p></div>
 </section>
 <div class="firma-q sube"><p>Gracias por ser parte<br>de esta gran familia</p><small>By Team ISS MODA</small></div>
@@ -65,7 +82,7 @@
 issCabecera("Modelo de prueba · Quiénes somos, con el texto y la foto que ya tenés en la tienda");
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);
   e.target.querySelectorAll("[data-to]").forEach(function(el){var to=+el.dataset.to,pre=el.dataset.pre||"",t0=null;requestAnimationFrame(function f(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/1300);el.textContent=pre+Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)})});}})},{threshold:.2});
-document.querySelectorAll(".sube").forEach(function(el){io.observe(el)});
+document.querySelectorAll(".sube,.pers").forEach(function(el){io.observe(el)});
 </script>
 </body>
 </html>
